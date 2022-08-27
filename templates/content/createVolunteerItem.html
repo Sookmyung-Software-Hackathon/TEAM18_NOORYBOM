@@ -142,6 +142,7 @@ var marker = new daum.maps.Marker({
     map: map
 });
 
+
 let lat=0;
 let lng=0;
 
@@ -218,7 +219,11 @@ $.ajax({
             alert("봉사가 등록되었습니다.")
             location.replace("/main/community");
         },
+        error: function () {
+            alert("항목을 모두 입력해주세요.")
+        }
     })
 }
 );
+
 </script>

@@ -36,10 +36,26 @@ crossorigin="anonymous"></script>
 
     <title>Community</title>
 </head>
+<style>
+    .nav-link {
+        color : gray;
+    }
 
+    .nav-link:hover {
+        color : #FFAAA5;
+    }
+    .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+        color: white;
+        background-color: #FFAAA5;
+      }
+      .tab-content>.active {
+        display: block;
+        box-shadow :0px -5px #FFAAA5
+      }
+</style>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light" style="position: fixed;width: 100%; z-index:10;">
+<nav class="navbar navbar-expand-lg navbar-light bg-lighst" style="position: fixed;width: 100%; z-index:10;">
     <div class="container-fluid" style="justify-content: space-between;flex-wrap: nowrap; min-width: 1000px">
         <a class="navbar-brand" href={% url "content:community"%}>
             <img style="width: 100px"
@@ -78,9 +94,9 @@ crossorigin="anonymous"></script>
 </nav>
 
 
-<div style="width: 100%; height: 60px; display: flex; text-align: center; justify-content: center;padding-top: 60px; background-color:#FAFAFA">
+<div class="tab_menu" style="width: 100%; height: 60px; display: flex; text-align: center; justify-content: center;padding-top: 60px; background-color:#FAFAFA">
     <div>
-        <ul class="nav nav-pills" role="tablist" style="color:#B0FDB3;">
+        <ul class="nav nav-pills" role="tablist">
             <li id = "volunteer_review" class="nav-item">
                 <a class="show_feed_boxes nav-link active" data-toggle="tab" href="#review">봉사후기</a>
             </li>
@@ -161,12 +177,12 @@ crossorigin="anonymous"></script>
         {%if volunteer.grant == 1 %}
         {%else%}
         
-            <div class="feed_box" style="width: 250px; margin: 20px; border:0; border-radius: 5%; box-shadow: 0px 2px 2px 0px gray;">
+            <div class="feed_box" style="width: 250px; height : 380px; margin: 20px; border:0; border-radius: 5%; box-shadow: 0px 2px 2px 0px gray;">
                 <div style="display:flex; flex-wrap: wrap; align-items: center; margin: 20px; position: relative;">
                     {%if volunteer.admin == mainuser%}
                     <img src="https://img.icons8.com/windows/344/trash.png" id = "deletebox_volunteer" volunteer_id="{{ volunteer.id }}" class="deletebox_volunteer" style = "width: 25px; height: 25px; position: absolute; right: 0px;cursor:pointer;">
                     {%endif%}
-                    <div>{{volunteer.create_time}}</div>
+                    <div>{{volunteer.title}}</div>
                     {%if mainuser.role == 'User'%}
                         {%if volunteer.isparticipated%}
                         <div id = "not_participate_volunteer" volunteer_id="{{ volunteer.id }}" class="not_participate_volunteer" style = "width: 35px; height: 35pxpx; position: absolute; right: 0px; background-color: green; cursor:pointer;">참여취소</div>
@@ -175,9 +191,9 @@ crossorigin="anonymous"></script>
                         {%endif%}
                     {%endif%}
                 </div>
-                <div>
+                <div style="width: 100%; height:70%; display:flex; align-items:center">
                     <a href="javascript:void(window.open('volunteer_detail/{{volunteer.id}}','_blank','width=500,height=700'))">
-                    <img style="width: 100%" src="{% get_media_prefix %}{{ volunteer.image }}"></a></div>
+                    <img style="width: 100%;" src="{% get_media_prefix %}{{ volunteer.image }}"></a></div>
                 <div style="margin: 0 20px;display: flex; flex-direction: row; justify-content: space-between">
                     <div>
                         <span id="bookmark_{{ volunteer.id }}" volunteer_id="{{ volunteer.id }}" class="bookmark material-icons-outlined" style="cursor: pointer">
@@ -188,13 +204,16 @@ crossorigin="anonymous"></script>
                             {% endif %}
                         </span>
                     </div>
+                    
                 </div>
+                <div>
                 <div style="margin: 0 20px;text-align: left;font-size: 14px"> 
                     지역 : {{ volunteer.region }} 
                 </div>
                 <div style="margin: 0 20px;text-align: left;font-size: 14px"> 
                     {{ volunteer.participant }} 명 남음
                 </div>
+            </div>
             </div>
         {%endif%} 
         {% endfor %}
@@ -206,19 +225,15 @@ crossorigin="anonymous"></script>
     <div id="first_modal" class="modal_overlay">
         <div class="modal_window">
             <div style="display: flex; flex-direction: row; justify-content: space-between">
-                <div style="width: 40px; background: gray">
-    
-                </div>
+              
                 <div>
-                    새 이미지 업로드
+                    봉사 후기 추가
                 </div>
-                <div style="width: 40px; background: gray">
                     <span class="modal_close material-icons-outlined">close</span>
-                </div>
             </div>
     
-            <div class="img_upload_space" style="border-top: solid 1px gray;width: 778px; height: 540px;margin-top: 10px">
-    
+            <div class="img_upload_space" style="border-top: solid 1px gray;width: 680px; height: 400px;margin-top: 10px">
+                새 이미지 업로드
             </div>
         </div>
     </div>
@@ -227,27 +242,23 @@ crossorigin="anonymous"></script>
     <div id="second_modal" class="modal_overlay">
         <div class="modal_window">
             <div style="display: flex; flex-direction: row; justify-content: space-between">
-                <div style="width: 40px; background: gray">
-    
-                </div>
                 <div>
-                    새 이미지 업로드
+                    봉사 후기 추가
                 </div>
-                <div style="width: 40px; background: gray">
                     <span class="modal_close material-icons-outlined">close</span>
-                </div>
+
             </div>
     
             <div style="border-top: solid 1px gray;display: flex; flex-direction: row;margin-top: 10px">
-                <div class="img_upload_space" style="width: 500px; height: 540px;">
-    
+                <div class="img_upload_space" style="width: 400px; height: 400px;">
+                    
                 </div>
                 <div style="border-left: solid 1px gray">
                     <div>
                         <textarea id="input_feed_content" class="form-control" style="width: 276px; height: 400px"
-                                  id="exampleFormControlTextarea1" rows="5"></textarea>
+                                  id="exampleFormControlTextarea1" rows="5" placeholder="내용 작성"></textarea>
                     </div>
-                    <button id="feed_create_button" type="button" class="btn btn-primary" style="width: 100%">
+                    <button id="feed_create_button" type="button" class="btn btn-primary" style="width: 100%; background-color:gray; border-color:gray;">
                         공유하기
                     </button>
                 </div>
