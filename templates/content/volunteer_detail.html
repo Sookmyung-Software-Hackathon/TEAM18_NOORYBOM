@@ -13,44 +13,52 @@
 
     <!-- Google Icon -->
     <link
-            href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
-            rel="stylesheet">
+        href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+        rel="stylesheet">
 
     <!-- Jquery -->
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-<!-- Option 1: Bootstrap Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-crossorigin="anonymous"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=73a7bf3da2a6472e3d0ca0cd49ccb6c3&libraries=services"></script>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=73a7bf3da2a6472e3d0ca0cd49ccb6c3&libraries=services"></script>
 
-<style>
-    .detail_box {
-        text-align: center;
-        border: solid 1px rgba(219, 219, 219, 1);
-        max-width: 500px; 
-        max-height: 1000px; 
-        margin : 30px auto; 
-        background: white;
-        border-radius : 7px;
-    }
-</style>
-<body>
+    <style>
+        .detail_box {
+            display:flex;
+            flex-direction:row;        
+            border: solid 1px rgba(219, 219, 219, 1);         
+            margin:30px;
+            background: white;
+            border-radius : 7px;
+        }
+    </style>
+</head>
+<body onresize="parent.resizeTo(700,500)" onload="parent.resizeTo(700,500)">
     <div class="detail_box">
-    <div style="height : 30px; background-color : silver; border-radius : 7px;">  봉사 상세 내용 </div>
-    <div style="border : solid 1px rgba(219, 219, 219, 1)">
-    <div><img style="width:50px; height:50px; border-radius : 70%" class="profile" src="{% get_media_prefix %}{{ profile_image }}"/></div>
-    <div>{{nickname}}</div>
+        <div style="margin:7px;border:solid 1px rgba(219, 219, 219, 1);">
+            <img style="width : 350px; height : 350px;" class="profile" src="{% get_media_prefix %}{{ volunteeritem.volunteer_image }}">
+        </div>
+        <div style="padding:5px;width:100%;">    
+            <div style="margin:0 auto;text-align:center;border-bottom:solid 1px rgba(219, 219, 219, 1);">
+                <div><img style="width:50px; height:50px; border-radius : 80%" class="profile" src="{% get_media_prefix %}{{ profile_image }}"/></div>
+                <div><b>{{nickname}}</b></div>
+                <div style="font-size: 1px;color:gray;"> {{volunteeritem.create_time}}</div>
+            </div>
+            <div style="overflow-y:scroll;height:260px;">
+                <table style="margin:5px;overflow-y:scroll;">
+                    <tr><th class = "text-center">제목</th><td style="border-left:2px solid rgba(219, 219, 219, 1);padding-left:7px;">{{volunteeritem.title}}</td></tr>
+                    <tr><th class = "text-center">봉사 기간</th><td style="border-left:2px solid rgba(219, 219, 219, 1);padding-left:7px;">입력해야 함</td></tr>
+                    <tr><th class = "text-center">봉사 시간</th><td style="border-left:2px solid rgba(219, 219, 219, 1);padding-left:7px;">{{ volunteeritem.start_time}} ~ {{ volunteeritem.end_time}}</td></tr>
+                    <tr><th class = "text-center">봉사 인정 시간</th><td style="border-left:2px solid rgba(219, 219, 219, 1);padding-left:7px;">입력해야 함</td></tr>
+                    <tr><th class = "text-center">모집 인원</th><td style="border-left:2px solid rgba(219, 219, 219, 1);padding-left:7px;">{{ volunteeritem.participant }} 명 남음</td></tr>
+                    <tr><th class = "text-center">지역</th><td style="border-left:2px solid rgba(219, 219, 219, 1);padding-left:7px;">{{ volunteeritem.region }}</td></tr>
+                    <tr><th class = "text-center">설명</th><td style="border-left:2px solid rgba(219, 219, 219, 1);padding-left:7px;">{{volunteeritem.description}}</td></tr>
+                </table>
+            </div>
+        </div>
     </div>
-    <div style="padding : 10px">
-        <img style="max-width : 400px; max-height : 400px;" class="profile" src="{% get_media_prefix %}{{ volunteeritem.volunteer_image }}">
-    </div>
-    <div>제목 : {{volunteeritem.title}}</div>
-    <div style="border : solid 1px rgba(219, 219, 219, 1); width : 80%; margin : 0 auto">{{volunteeritem.description}}</div>
-    <div>인원 : {{ volunteeritem.participant }} 명 남음</div>
-    <div>지역 : {{ volunteeritem.region }}</div>
-    <div>글쓴 시간 : {{volunteeritem.create_time}}</div>
-</div>
 </body>
