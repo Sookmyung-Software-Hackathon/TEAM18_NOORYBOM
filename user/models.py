@@ -13,17 +13,17 @@ class User(AbstractBaseUser):
         유저 이메일주소 -> 회원가입할때 사용하는 아이디
         유저 비밀번호 -> 디폴트 쓰자
     """
-    RANKING_SEED = 'Seed'
-    RANKING_SPROUT = 'Sprout'
-    RANKING_SEEDLING = 'Seedling'
-    RANKING_TREE = 'Tree'
-    RANKING_FLOWER = 'Flower'
+    RANKING_SEED = 'Seed💧'
+    RANKING_SPROUT = 'Sprout🌱'
+    RANKING_SEEDLING = 'Seedling🍃'
+    RANKING_TREE = 'Tree🌲'
+    RANKING_FLOWER = 'Flower🌸'
     RANKING_CHOICES = [
-        (RANKING_SEED, 'Seed'),
-        (RANKING_SPROUT, 'Sprout'),
-        (RANKING_SEEDLING, 'Seedling'),
-        (RANKING_TREE, 'Tree'),
-        (RANKING_FLOWER, 'Flower'),
+        (RANKING_SEED, 'Seed💧'),
+        (RANKING_SPROUT, 'Sprout🌱'),
+        (RANKING_SEEDLING, 'Seedling🍃'),
+        (RANKING_TREE, 'Tree🌲'),
+        (RANKING_FLOWER, 'Flower🌸'),
     ]
 
     ROLE_ADMIN = 'Admin'

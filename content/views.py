@@ -88,6 +88,9 @@ class Participate(APIView):
         volunteer_id = request.data.get('volunteer_id')
         participated_item = VolunteerItem.objects.filter(id=volunteer_id).first()
 
+        print(volunteer_id)
+        print(participated_item)
+
         ParticipateItems.objects.create(
             user_id = mainuser.id,
             volunteerItem_id = participated_item.id,
@@ -168,18 +171,18 @@ class Profile(APIView):
                         user = User.objects.filter(id = participated_item.user_id).first()
                         isgranted = participated_item.grant
                         participate_list.append([item, user, isgranted])
-                    print(participate_list)
         else:
             participated_list =[]
             participated_list.append(ParticipateItems.objects.filter(user_id = mainuser.id).all()) # 현재 유저가 신청한 volunteeritem들
-            for participated_item in participated_list:
-                if(participated_item):
-                    participate_item = VolunteerItem.objects.filter(id = participated_item.first().volunteerItem_id) # 직접 volunteeritem 객체 배열에 넣어주기
-                    if participate_item:
-                        grant = ParticipateItems.objects.filter(volunteerItem_id = participate_item.first().id).first().grant # 해당 봉사의 승인 여부
-                        print(grant)
-                        participate_list.append([participate_item, grant])
-                    continue
+            for i in participated_list:
+                print(i)
+                for participated_item in i:
+                    print(participated_item)
+                    if(participated_item):
+                        participate_item = VolunteerItem.objects.filter(id = participated_item.volunteerItem_id) # 직접 volunteeritem 객체 배열에 넣어주기
+                        if participate_item:
+                            grant = ParticipateItems.objects.filter(volunteerItem_id = participate_item.first().id).first().grant # 해당 봉사의 승인 여부
+                            participate_list.append([participate_item, grant])
 
         feed_list = Feed.objects.filter(email=email)
         like_list = list(Like.objects.filter(email=email, is_like=True).values_list('feed_id', flat=True))
@@ -204,14 +207,14 @@ class Profile(APIView):
         granted_user = User.objects.filter(id=user).first()
         granted_user.sum_time += int(time)
 
-        if granted_user.sum_time >=10 :
-            granted_user.ranking = 'Flower'
-        elif granted_user.sum_time >=8 :
-            granted_user.ranking = 'Tree'
-        elif granted_user.sum_time >=6 :
-            granted_user.ranking = 'Seedling'
-        elif granted_user.sum_time >=4 :
-            granted_user.ranking = 'Sprout'
+        if granted_user.sum_time >=20 :
+            granted_user.ranking = 'Flower🌸'
+        elif granted_user.sum_time >=15 :
+            granted_user.ranking = 'Tree🌲'
+        elif granted_user.sum_time >=10 :
+            granted_user.ranking = 'Seedling🍃'
+        elif granted_user.sum_time >=5 :
+            granted_user.ranking = 'Sprout🌱'
 
         granted_user.save()
 

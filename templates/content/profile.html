@@ -71,54 +71,46 @@ crossorigin="anonymous"></script>
         </div>
     </nav>
 
-<div style="display: flex; flex-direction: row; text-align: center; padding-top: 60px; background-color:#FAFAFA">
+<div style="width: 100%; height: 70px;"></div>
+
+<div style="display: flex; flex-direction: row; text-align: center; padding-top: 60px; width: 1000px; height: 300px; margin: 0 auto;
+ border: solid #D4D1CF; border-width: 1px; border-radius: 30px; ">
     <div style="padding: 20px 60px">
         <div class="box">
-
-            <img class="profile"
-                src="{% get_media_prefix %}{{ mainuser.profile_image }}">
-
+            <img class="profile" src="{% get_media_prefix %}{{ mainuser.profile_image }}">
         </div>
     </div>    
     <div style="text-align: left">
         <div style=" margin: 20px 0">
-            <div style="font-size: 26px; margin-right: 40px;">
+            <div style="font-size: 26px; margin-right: 40px; font-weight: 600;">
                 {{ mainuser.nickname }}
             </div>
-            <button id="button_profile_upload" style="margin-right: 40px"> 프로필 사진 편집</button>
+            <button id="button_profile_upload" style="margin-right: 40px; border:0; outline:0; border-radius: 10px;"> 프로필 사진 편집</button>
             <input type="file" id="input_fileupload" onchange="profile_upload();" style="display: none" />
-            <span class="material-icons-outlined" style="margin-right: 40px">settings</span>
         </div>
-
         <div id="click_follow" style="margin-bottom: 20px">
-            내 게시물건수 <br/>
-            <span style="height:30px;"id="follow_open">팔로워 {{ mainuser.followings.count }} 팔로잉 {{mainuser.followers.all|length}}</span>
+            <br/>나의 봉사 등급  : {{mainuser.ranking}}
+            <br/>총 봉사 시간 :  {{mainuser.sum_time}}시간
+        </div>
+        <span style="height:30px; background-color:#F2F2F2; border-radius: 5px;"id="follow_open">팔로워 {{ mainuser.followings.count }} 팔로잉 {{mainuser.followers.all|length}}</span>
             <div id="follow" style="display:none;">
-                <div style="width: 600px; position: fixed; background-color:green; z-index: 1;">
-                    <div id="follow_close" style="width:600px; height:30px; background-color:yellow;">XXXXXXXXXXXXXXXXXXX</div>
+                <div style="width: 300px; border: solid #D4D1CF; border-width: 1px; border-radius: 10px; background-color: white; z-index: 1;">
+                    <div id="follow_close" style="width:300px; height:30px; background-color:#FFDEF1; text-align: center; line-height: 30px;">창 닫기</div>
                     {{mainuser.followers.id}}
                     {%for user in user_list%}
                         {%if user.id != mainuser.id%}
-                        <div style="width: 600px; height: 30px;"> 
+                        <div style="width: 280px; height: 30px; position: relative; margin: 10px;"> 
                             <span>{{user.name}}</span>
                             {%if user in mainuser.followers.all%}
-                                <button user = {{user.email}} class="follow">팔로우 취소</button>
+                                <button style="border:none; outline:none; position:absolute; right: 10px;" user = {{user.email}} class="follow">팔로우 취소</button>
                             {%else%}
-                                <button user = {{user.email}} class="follow">팔로우</button>
+                                <button style="border:none; outline:none; position:absolute; right: 10px; " user = {{user.email}} class="follow">팔로우</button>
                             {%endif%}
                         </div>
                         {%endif%}
                     {% endfor %}
                 </div>   
             </div>
-            {%if mainuser.role == 'User'%}
-                <br/>티어 {{mainuser.ranking}}
-                <br/>총 봉사 시간 {{mainuser.sum_time}}
-            {%endif%}
-        </div>
-        <div>
-            <b>{{ mainuser.name }}</b>
-        </div>
     </div>
 </div>
 
@@ -158,22 +150,22 @@ crossorigin="anonymous"></script>
 </div>
 {%endif%}-->
 
-<div style="border-top: solid 2px rgba(50,50,50,0.1); width: 100%"> 
-    <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; margin: 20px">
+<div style="border-top: solid 2px rgba(50,50,50,0.1); width: 1000px; margin: 20px auto;"> 
+    <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; margin: 20px;">
         {%if mainuser.ranking == 'Seed'%}
-        <div id="rank" style="cursor: pointer;margin: 0 30px;display: flex; flex-direction: row;align-items: center"><span class="material-icons-outlined">filter_vintage</span></div>
+        <div id="rank" style="color : #FFAAA5; cursor: pointer;margin: 0 30px;display: flex; flex-direction: row;align-items: center"><span class="material-icons-outlined">filter_vintage</span></div>
         {%endif%}
         {%if mainuser.ranking == 'Sprout'%}
-            <div id="rank" style="cursor: pointer;margin: 0 30px;display: flex; flex-direction: row;align-items: center"><span class="material-icons-outlined">filter_vintage</span><span class="material-icons-outlined">filter_vintage</span></div>
+            <div id="rank" style="color : #FFAAA5; cursor: pointer;margin: 0 30px;display: flex; flex-direction: row;align-items: center"><span class="material-icons-outlined">filter_vintage</span><span class="material-icons-outlined">filter_vintage</span></div>
         {%endif%}
         {%if mainuser.ranking == 'Seedling'%}
-            <div id="rank" style="cursor: pointer;margin: 0 30px;display: flex; flex-direction: row;align-items: center"><span class="material-icons-outlined">filter_vintage</span><span class="material-icons-outlined">filter_vintage</span></div><span class="material-icons-outlined">filter_vintage</span>
+            <div id="rank" style="color : #FFAAA5; cursor: pointer;margin: 0 30px;display: flex; flex-direction: row;align-items: center"><span class="material-icons-outlined">filter_vintage</span><span class="material-icons-outlined">filter_vintage</span></div><span class="material-icons-outlined">filter_vintage</span>
         {%endif%}
         {%if mainuser.ranking == 'Tree'%}
-            <div id="rank" style="cursor: pointer;margin: 0 30px;display: flex; flex-direction: row;align-items: center"><span class="material-icons-outlined">filter_vintage</span><span class="material-icons-outlined">filter_vintage</span><span class="material-icons-outlined">filter_vintage</span><span class="material-icons-outlined">filter_vintage</span></div>
+            <div id="rank" style="color : #FFAAA5; cursor: pointer;margin: 0 30px;display: flex; flex-direction: row;align-items: center"><span class="material-icons-outlined">filter_vintage</span><span class="material-icons-outlined">filter_vintage</span><span class="material-icons-outlined">filter_vintage</span><span class="material-icons-outlined">filter_vintage</span></div>
         {%endif%}
         {%if mainuser.ranking == 'Flower'%}
-            <div id="rank" style="cursor: pointer;margin: 0 30px;display: flex; flex-direction: row;align-items: center"><span class="material-icons-outlined">filter_vintage</span><span class="material-icons-outlined">filter_vintage</span><span class="material-icons-outlined">filter_vintage</span><span class="material-icons-outlined">filter_vintage</span><span class="material-icons-outlined">filter_vintage</span></div>
+            <div id="rank" style="color : #FFAAA5; cursor: pointer;margin: 0 30px;display: flex; flex-direction: row;align-items: center"><span class="material-icons-outlined">filter_vintage</span><span class="material-icons-outlined">filter_vintage</span><span class="material-icons-outlined">filter_vintage</span><span class="material-icons-outlined">filter_vintage</span><span class="material-icons-outlined">filter_vintage</span></div>
         {%endif%}
 
     </div>
@@ -181,76 +173,41 @@ crossorigin="anonymous"></script>
 
 
 
-<div style="border-top: solid 2px rgba(50,50,50,0.1); width: 100%">
+<div style="border-top: solid 2px rgba(50,50,50,0.1); width: 1000px; margin: 0 auto;">
   
     <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; margin: 20px">
-        <div id="button_feed_list" style="cursor: pointer;margin: 0 30px;display: flex; flex-direction: row;align-items: center"><span class="material-icons-outlined">note_add</span>봉사일기장</div>
-        <div id="button_feed_like_list" style="cursor: pointer;margin: 0 30px;display: flex; flex-direction: row;align-items: center"><span class="material-icons-outlined">volunteer_activism</span>좋아요</div>
-        <div id="button_feed_bookmark_list" style="cursor: pointer;margin: 0 30px;display: flex; flex-direction: row;align-items: center"><span class="material-icons-outlined">collections_bookmark</span>북마크</div>
         {%if mainuser.role == 'User'%}
-            <div id="button_feed_getvolunteer" style="cursor: pointer;margin: 0 30px;display: flex; flex-direction: row;align-items: center"><span class="material-icons-outlined">rule</span>봉사 신청 내역</div>
+            <div id="button_feed_getvolunteer" style="color: black; font-weight: 500; cursor: pointer;margin: 0 30px;display: flex; flex-direction: row;align-items: center"><span class="material-icons-outlined">rule</span>봉사 신청 내역</div>
         {%endif%}
 
         {%if mainuser.role == 'Admin'%}
-            <div id="button_feed_getvolunteer" style="cursor: pointer;margin: 0 30px;display: flex; flex-direction: row;align-items: center"><span class="material-icons-outlined">rule</span>봉사 신청 받은 내역</div>
+            <div id="button_feed_getvolunteer" style="color: #FFABDF; font-weight: 600; cursor: pointer;margin: 0 30px;display: flex; flex-direction: row;align-items: center"><span class="material-icons-outlined">rule</span>봉사 신청 받은 내역</div>
         {%endif%}
 
+        <div id="button_feed_list" style="color: black; font-weight: 500; cursor: pointer;margin: 0 30px;display: flex; flex-direction: row;align-items: center"><span class="material-icons-outlined">note_add</span>봉사일기장</div>
+        <div id="button_feed_like_list" style="color: black; font-weight: 500; cursor: pointer;margin: 0 30px;display: flex; flex-direction: row;align-items: center"><span class="material-icons-outlined">volunteer_activism</span>좋아요</div>
+        <div id="button_feed_bookmark_list" style="color: black; font-weight: 500; cursor: pointer;margin: 0 30px;display: flex; flex-direction: row;align-items: center"><span class="material-icons-outlined">collections_bookmark</span>북마크</div>
     </div>
 
 </div>
 
-<div id="feed_list" style="width: 100%; min-width: 1000px; display: flex; align-items: center;justify-content: center">
-    <div style="display: flex; flex-direction: row; flex-wrap: wrap; width: 1000px; justify-content: center">
-        {% for feed in feed_list %}
-            <div style="width: 300px;height: 300px; margin: 10px 5px 0px 5px;">
-
-                <div><img style="width: 300px;height: 300px; object-fit: cover"
-                          src="{% get_media_prefix %}{{ feed.image }}">
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-</div>
-
-<div id="like_feed_list" style="width: 100%; min-width: 1000px; display: none; align-items: center;justify-content: center">
-    <div style="display: flex; flex-direction: row; flex-wrap: wrap; width: 1000px; justify-content: center">
-        {% for feed in like_feed_list %}
-            <div style="width: 300px;height: 300px; margin: 10px 5px 0px 5px;">
-
-                <div><img style="width: 300px;height: 300px; object-fit: cover"
-                          src="{% get_media_prefix %}{{ feed.image }}">
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-</div>
-
-<div id="bookmark_feed_list" style="width: 100%; min-width: 1000px; display: none; align-items: center;justify-content: center">
-    <div style="display: flex; flex-direction: row; flex-wrap: wrap; width: 1000px; justify-content: center">
-        {% for volunteer in bookmark_volunteer_list %}
-            <div style="width: 300px;height: 300px; margin: 10px 5px 0px 5px;">
-
-                <div><img style="width: 300px;height: 300px; object-fit: cover"
-                        src="{% get_media_prefix %}{{ volunteer.volunteer_image }}">
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-</div>
-
-<div id="getvolunteer_feed_list" style="width: 100%; min-width: 1000px; display: none; align-items: center;justify-content: center">
+<div id="getvolunteer_feed_list" style="width: 100%; min-width: 1000px; display:flex; align-items: center;justify-content: center">
     <div style="display: flex; flex-direction: row; flex-wrap: wrap; width: 1000px; justify-content: center">
         {%if mainuser.role == 'User'%}
         <div>
             {% for dict in participate_list%}
                 {%for item in dict.0%}
-                    <div>{{item.title}}</div>
-                    <div>{{item.grant}}</div>
+                <div style="width: 850px; height: 100px; border: solid #D4D1CF; border-width:1.7px; border-radius: 20px;
+                margin: 20px auto; position: relative;">
+                    <span style=" position: absolute; top: 35px; left: 30px;">{{item.title}}</span>
                     {%if dict.1 == False%}
-                        <div>승인 대기</div>
+                        <div style="width: 100px; height: 30px; text-align: center; background-color: #FFDEF1; border-radius: 20px; 
+                        line-height: 30px; position: absolute; right: 20px; top: 35px; color: #4D4D4D;">승인 대기</div>
                     {%else%}
-                        <div>승인됨<div>
+                    <div style="width: 100px; height: 30px; text-align: center; background-color: #FFDEF1; border-radius: 20px; 
+                    line-height: 30px; position: absolute; right: 20px; top: 35px; color: #4D4D4D;">승인됨</div>
                     {%endif%}
+                </div>
                 {%endfor%}
             {%endfor%}
         </div>
@@ -261,15 +218,61 @@ crossorigin="anonymous"></script>
         <div>
             {% for outitem in participate_list%}
                 {%if outitem.2 == False %}
-                    <div>{{outitem.0.title}}</div>
-                    <button id="grant">승인</button>
-                    <input id="user" value={{outitem.1.id}}></input>
-                    <input id="item" value={{outitem.0.id}}></input>
-                    <input id="admit_time" value={{outitem.0.admit_time}}></input>
+                <div style="width: 850px; height: 100px; border: solid #D4D1CF; border-width:1.7px; border-radius: 20px;
+                margin: 20px auto; position: relative;">
+                <span style=" position: absolute; top: 35px; left: 30px;">{{outitem.0.title}}</span>
+                <span style=" position: absolute; top: 35px; left: 130px;">신청자 : {{outitem.1.nickname}}</span>
+                <button id ="grant" style="width: 100px; height: 30px; text-align: center; background-color: #FFDEF1; border-radius: 20px; 
+                line-height: 30px; position: absolute; right: 20px; top: 35px; color: #4D4D4D; border:0; outline:0;">승인하기</button>
+                    <input type="hidden" id="user" value={{outitem.1.id}}></input>
+                    <input type="hidden" id="item" value={{outitem.0.id}}></input>
+                    <input type="hidden" id="admit_time" value={{outitem.0.admit_time}}></input>
+                </div>
                 {%endif%}
             {%endfor%}
         </div>
         {%endif%}
+    </div>
+</div>
+
+<div id="feed_list" style="width: 100%; min-width: 1000px; display: none; align-items: center;justify-content: center">
+    <div style="display: flex; flex-direction: row; flex-wrap: wrap; width: 1000px; justify-content: center">
+        {% for feed in feed_list %}
+        <a href="feed_detail/{{feed.id}}">
+            <div style="width: 300px;height: 300px; margin: 10px 5px 0px 5px;">
+                <div><img style="width: 300px;height: 300px; object-fit: cover" src="{% get_media_prefix %}{{ feed.image }}">
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+<div id="like_feed_list" style="width: 100%; min-width: 1000px; display: none; align-items: center;justify-content: center">
+    <div style="display: flex; flex-direction: row; flex-wrap: wrap; width: 1000px; justify-content: center">
+        {% for feed in like_feed_list %}
+        <a href="feed_detail/{{feed.id}}">
+            <div style="width: 300px;height: 300px; margin: 10px 5px 0px 5px;">
+                <div><img style="width: 300px;height: 300px; object-fit: cover"
+                          src="{% get_media_prefix %}{{ feed.image }}">
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+<div id="bookmark_feed_list" style="width: 100%; min-width: 1000px; display: none; align-items: center;justify-content: center">
+    <div style="display: flex; flex-direction: row; flex-wrap: wrap; width: 1000px; justify-content: center">
+        {% for volunteer in bookmark_volunteer_list %}
+        <a href="volunteer_detail/{{volunteer.id}}">
+            <div style="width: 300px;height: 300px; margin: 10px 5px 0px 5px;">
+                <div><img style="width: 300px;height: 300px; object-fit: cover"
+                        src="{% get_media_prefix %}{{ volunteer.volunteer_image }}">
+                </div>
+            </div>
+        </a>
+        {% endfor %}
     </div>
 </div>
 
@@ -358,7 +361,7 @@ crossorigin="anonymous"></script>
 
     $("#button_feed_list").click(function (){
         $('#feed_list').css({
-            display : 'flex'
+            display : 'flex',
         });
         $('#like_feed_list').css({
             display : 'none'
@@ -369,13 +372,32 @@ crossorigin="anonymous"></script>
         $('#getvolunteer_feed_list').css({
             display : 'none'
         })
+
+
+        $('#button_feed_getvolunteer').css({
+            color : 'black',
+            fontWeight: 500
+        });
+        $('#button_feed_list').css({
+            color : 'black',
+            fontWeight: 500
+        });
+        $('#button_feed_list').css({
+            color : '#FFABDF',
+            fontWeight: 600
+        });
+        $('#button_feed_bookmark_list').css({
+            color : 'black',
+            fontWeight: 500
+        });
     });
+
     $("#button_feed_like_list").click(function (){
         $('#feed_list').css({
             display : 'none'
         });
         $('#like_feed_list').css({
-            display : 'flex'
+            display : 'flex',
         });
         $('#bookmark_feed_list').css({
             display : 'none'
@@ -383,7 +405,26 @@ crossorigin="anonymous"></script>
         $('#getvolunteer_feed_list').css({
             display : 'none'
         });
+
+
+        $('#button_feed_getvolunteer').css({
+            color : 'black',
+            fontWeight: 500
+        });
+        $('#button_feed_list').css({
+            color : 'black',
+            fontWeight: 500
+        });
+        $('#button_feed_like_list').css({
+            color : '#FFABDF',
+            fontWeight: 600
+        });
+        $('#button_feed_bookmark_list').css({
+            color : 'black',
+            fontWeight: 500
+        });
     });
+
     $("#button_feed_bookmark_list").click(function (){
         $('#feed_list').css({
             display : 'none'
@@ -396,6 +437,24 @@ crossorigin="anonymous"></script>
         });
         $('#getvolunteer_feed_list').css({
             display : 'none'
+        });
+
+
+        $('#button_feed_getvolunteer').css({
+            color : 'black',
+            fontWeight: 500
+        });
+        $('#button_feed_list').css({
+            color : 'black',
+            fontWeight: 500
+        });
+        $("#button_feed_like_list").css({
+            color : 'black',
+            fontWeight: 500
+        });
+        $('#button_feed_bookmark_list').css({
+            color : '#FFABDF',
+            fontWeight: 600
         });
     });
 
@@ -412,6 +471,24 @@ crossorigin="anonymous"></script>
         $('#getvolunteer_feed_list').css({
             display : 'flex'
         })
+
+
+        $('#button_feed_getvolunteer').css({
+            color : '#FFABDF',
+            fontWeight: 600
+        });
+        $('#button_feed_list').css({
+            color : 'black',
+            fontWeight: 500
+        });
+        $("#button_feed_like_list").css({
+            color : 'black',
+            fontWeight: 500
+        });
+        $('#button_feed_bookmark_list').css({
+            color : 'black',
+            fontWeight: 500
+        });
     });
 
 
@@ -526,6 +603,38 @@ crossorigin="anonymous"></script>
 
     }
 
+    $('#feed_create_button').click(function () {
+        alert("공유하기 눌렀다.");
+
+        let file = files[0];
+        let image = files[0].name;
+        let content = $('#input_feed_content').val();
+
+        let fd = new FormData();
+
+        fd.append('file', file);
+        fd.append('image', image);
+        fd.append('content', content);
+
+        $.ajax({
+            url: "/main/upload_feed",
+            data: fd,
+            method: "POST",
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                alert("성공");
+            },
+            error: function (request, status, error) {
+                alert("에러");
+            },
+            complete: function () {
+                alert("완료");
+                location.replace("/main/community");
+            }
+        });
+    });
+
     $('#button_profile_upload').click(function (){
         $('#input_fileupload').click();
     });
@@ -574,9 +683,9 @@ crossorigin="anonymous"></script>
 
     $(".follow").click(function (event) {
         let follow_email = event.target.attributes.getNamedItem("user").value;
-        alert(follow_email)
+
         $.ajax({
-            url: "/main/test",
+            url: "/main/follow",
             data: {
                 follow_email: follow_email
             },

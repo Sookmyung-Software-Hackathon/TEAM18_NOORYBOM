@@ -24,7 +24,7 @@ urlpatterns = [
     path('feed_detail/<int:feed_id>', feed_detail),
     path('volunteer_detail/<int:feed_id>', volunteer_detail),
 
-    path('test', Follow.as_view(), name="test"),
+    path('follow', Follow.as_view(), name="folow"),
 
     path('bookmark_volunteer', ToggleBookmark.as_view()),
     path('participate_volunteer', Participate.as_view()),

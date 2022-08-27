@@ -96,7 +96,6 @@ crossorigin="anonymous"></script>
                 <!-- 여기서부터 피드박스 -->
                 <div id = "volunteer_review_content" style="width:1200px; display:flex; flex-wrap:wrap;">
                     {% for feed in feeds %}
-                    <a href="feed_detail/{{feed.id}}">
                         <div id = "select_review" class="{{feed.id}}" style="width: 250px; height: 350px; margin: 20px; border:0; box-shadow: 0px 2px 2px 0px gray; border-radius: 5%;"> 
                             <div class="feed_box ">
                                 <div style="display: flex; flex-wrap: wrap; flex-direction: row; align-items: center; margin: 20px; position: relative;">
@@ -109,7 +108,9 @@ crossorigin="anonymous"></script>
                                     {%endif%}
                             </div>
                             <div>
-                                <img style="width: 100%" src="{% get_media_prefix %}{{ feed.image }}">
+                                <a href="feed_detail/{{feed.id}}">
+                                    <img style="width: 100%" src="{% get_media_prefix %}{{ feed.image }}">
+                                </a>   
                             </div>
                             <div style="margin: 0 20px;display: flex; flex-direction: row; justify-content: space-between">
                             <div>
@@ -124,7 +125,6 @@ crossorigin="anonymous"></script>
                                 </span>
                             </div>
                         </div>
-                    </a>
                 </div>
                 <div style="margin: 0 20px;text-align: left;font-size: 14px"> 춘식이 <b>외 {{ feed.like_count }}명</b>이좋아합니다.</div>
                 <div style="margin: 0 20px;text-align: left;font-size: 16px">
@@ -163,7 +163,6 @@ crossorigin="anonymous"></script>
         {% for volunteer in volunteers %}
         {%if volunteer.grant == 1 %}
         {%else%}
-        <a href="volunteer_detail/{{volunteer.id}}">
             <div class="feed_box" style="width: 250px; height:350px; margin: 20px; border:0; border-radius: 5%; box-shadow: 0px 2px 2px 0px gray;">
                 <div style="display:flex; flex-wrap: wrap; align-items: center; margin: 20px; position: relative;">
                     {%if volunteer.admin == mainuser%}
@@ -178,7 +177,11 @@ crossorigin="anonymous"></script>
                         {%endif%}
                     {%endif%}
                 </div>
-                <div><img style="width: 100%" src="{% get_media_prefix %}{{ volunteer.image }}"></div>
+                <div>
+                    <a href="volunteer_detail/{{volunteer.id}}">
+                        <img style="width: 100%" src="{% get_media_prefix %}{{ volunteer.image }}">
+                    </a>
+                </div>
                 <div style="margin: 0 20px;display: flex; flex-direction: row; justify-content: space-between">
                     <div>
                         <span id="bookmark_{{ volunteer.id }}" volunteer_id="{{ volunteer.id }}" class="bookmark material-icons-outlined" style="cursor: pointer">
@@ -197,7 +200,6 @@ crossorigin="anonymous"></script>
                     {{ volunteer.participant }}명 남음
                 </div>
             </div>
-        </a>
         {%endif%} 
         {% endfor %}
     </div>
@@ -525,7 +527,6 @@ crossorigin="anonymous"></script>
                 location.replace("/main/community");
             },
             error: function (request, status, error) {
-                alert("한 번에 한 봉사만 신청이 가능합니다")
             },
         });
         }
