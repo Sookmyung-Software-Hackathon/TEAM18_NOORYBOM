@@ -43,15 +43,15 @@ crossorigin="anonymous"></script>
                 </a>
             </div> 
             <div style="display: flex">
-                <a href={% url "content:community"%} style="color: black">커뮤니티</a>
+                <a href={% url "content:community"%} style="text-decoration:none;color: black">커뮤니티</a>
                 &nbsp;  &nbsp;  &nbsp; 
-                <a href={% url "content:search"%} style="color: black">봉사 검색</a>
+                <a href={% url "content:search"%} style="text-decoration:none;color: black">봉사 검색</a>
                 &nbsp;  &nbsp;  &nbsp; 
                 {%if mainuser.role == 'Admin'%}
-                <a href={% url "content:create_volunteer"%} style="color: black">봉사 추가</a>
+                <a href={% url "content:create_volunteer"%} style="text-decoration:none;color: black">봉사 추가</a>
                 &nbsp;  &nbsp;  &nbsp; 
                 {%endif%} 
-                <span id="nav_bar_add_box" class="material-icons-outlined" style="padding-right: 10px">add_box</span>
+                <span id="nav_bar_add_box" style="font-size : 16px; text-decoration:none; padding-right: 10px">후기 추가</span>
                 &nbsp;  &nbsp;  &nbsp; 
                 <div class="dropdown">
                     <a href="#" role="button" id="dropdownMenuLink"

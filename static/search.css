@@ -34,7 +34,6 @@
   right: 5px;
   box-shadow: 0px 4px 4px #ffc7df;
   background: rgba(255, 255, 255, 1);
-  color: #4d4d4d;
 }
 
 .button {
@@ -53,6 +52,8 @@ input[type="search"]::placeholder {
 }
 
 .search_result {
+  position: absolute;
+  top: 420px;
   /*left: 650px;*/
 
   font-family: "Inter";
@@ -64,14 +65,12 @@ input[type="search"]::placeholder {
   align-items: center;
   text-align: center;
   border-width: 2px;
-  border-top: solid #d4d1cf;
-  border-bottom: solid #d4d1cf;
-  border-width: 2px;
-  padding: 35px 0px;
+  border-top: solid #ffdef1;
+  border-bottom: solid #ffdef1;
   justify-content: center;
 
   color: #4d4d4d;
-  background-color: #fafafa;
+  background-color: white;
   height: 50px;
   width: 100%;
   border-radius: 10px;
@@ -96,6 +95,7 @@ input[type="search"]::placeholder {
   border-style: none;
   width: 50px;
   height: 50px;
+  margin: 10px;
   border-radius: 10px;
 
   position: relative;
@@ -120,17 +120,16 @@ input[type="search"]::placeholder {
   background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(1.5px);
   -webkit-backdrop-filter: blur(1.5px);
-  z-index: 10000;
 }
 
 .modal_window {
   background: white;
   backdrop-filter: blur(13.5px);
   -webkit-backdrop-filter: blur(13.5px);
+  border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
-  width: 700px;
-  height: 500px;
+  width: 800px;
+  height: 600px;
   position: relative;
   padding: 10px;
-  border-radius : 5px;
 }
