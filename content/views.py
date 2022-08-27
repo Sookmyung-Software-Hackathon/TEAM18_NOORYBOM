@@ -37,8 +37,8 @@ class Community(APIView):
             reply_object_list = Reply.objects.filter(feed_id=feed.id)
             reply_list = []
             for reply in reply_object_list:
-                user = User.objects.filter(email=reply.email).first()
-                reply_list.append(dict(reply_content=reply.reply_content,nickname=user.nickname))
+                reply_user = User.objects.filter(email=reply.email).first()
+                reply_list.append(dict(reply_content=reply.reply_content,nickname=reply_user.nickname))
             like_count=Like.objects.filter(feed_id=feed.id, is_like=True).count()
             is_liked=Like.objects.filter(feed_id=feed.id, email=email, is_like=True).exists()
             feed_list.append(dict(id=feed.id,
