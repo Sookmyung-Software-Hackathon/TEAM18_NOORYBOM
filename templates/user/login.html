@@ -61,11 +61,11 @@
             method: "POST",
             success: function (data) {
                 console.log("성공");
-                alert("로그인 성공");
                 location.replace('/main');
 
             },
             error: function (request, status, error) {
+                alert("일치하는 이메일/비밀번호가 없습니다.")
                 console.log("에러");
             },
             complete: function () {

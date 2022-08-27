@@ -71,7 +71,8 @@ class Community(APIView):
                                 isparticipated = isparticipated,
                                 grant = grant,
                                 is_marked = is_marked,
-                                create_time = volunteer.create_time
+                                create_time = volunteer.create_time,
+                                title = volunteer.title,
                                 ))
 
 
@@ -316,6 +317,7 @@ class Search(APIView):
             query = VolunteerItem.objects.filter(Q(lat = d[1]) & Q(lng = d[2])).distinct()
             volunteer_list.append(query)
         
+
         bookmark_volunteer_list=[]
         for set_item in volunteer_list:
             for item in set_item:

@@ -37,35 +37,34 @@
 </head>
 
 <body>
-<div>
-    <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="position: fixed;top:0;width: 100%; z-index:10;">
+    <nav class="navbar navbar-expand-lg navbar-light " style="position: fixed;width: 100%; top : 0px; height: 60px; display:block; z-index:10; background-color:rgba(255,255,255,0.5);">
         <div class="container-fluid" style="justify-content: space-between;flex-wrap: nowrap; min-width: 1000px">
-            <a class="navbar-brand" href={% url "content:main"%}><img style="width: 100px"
-                                                    src="https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png">
-            </a>
+            <div style="width: 600px; margin: 0 auto; display:flex; justify-content: center; padding-left: 330px;">
+                <a class="navbar-brand" href={% url "content:main"%}>
+                    <img style="width: 100px;"
+                    src="../../media/누리봄.png">
+                </a>
+            </div> 
             <div style="display: flex">
-                <a href={% url "content:community"%} style="color: black">커뮤니티</a>
+                <a href={% url "content:community"%} style="text-decoration:none;color: black">커뮤니티</a>
                 &nbsp;  &nbsp;  &nbsp; 
-                <a href={% url "content:search"%} style="color: black">봉사 검색</a>
+                <a href={% url "content:search"%} style="text-decoration:none;color: black">봉사 검색</a>
                 &nbsp;  &nbsp;  &nbsp; 
                 {%if mainuser.role == 'Admin'%}
-                <a href={% url "content:create_volunteer"%} style="color: black">봉사 추가</a>
+                <a href={% url "content:create_volunteer"%} style="text-decoration:none;color: black">봉사 추가</a>
                 &nbsp;  &nbsp;  &nbsp; 
-                {%endif%}
-                <span id="nav_bar_add_box" class="material-icons-outlined" style="padding-right: 10px">add_box</span>
-                &nbsp;  &nbsp;  &nbsp; 
+                {%endif%} 
                 <div class="dropdown">
                     <a href="#" role="button" id="dropdownMenuLink"
-                        data-bs-toggle="dropdown" aria-expanded="false">
+                       data-bs-toggle="dropdown" aria-expanded="false">
                         <div class="box" style="width: 40px; height: 40px">
                             <img class="profile"
-                                src="{% get_media_prefix %}{{ mainuser.profile_image }}">
+                                 src="{% get_media_prefix %}{{ mainuser.profile_image }}">
                         </div>
                     </a>
     
                     <ul class="dropdown-menu" style="left:-158px" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item" href="/main/profile">프로필</a></li>
+                        <li><a class="dropdown-item" href="/main/profile">마이페이지</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
@@ -75,8 +74,6 @@
             </div>
         </div>
     </nav>
-    </header>
-</div>
 
 <div style="width:50%; margin: 70px auto;">
     <h4>봉사를 추가해주세요.</h4>
@@ -125,6 +122,51 @@
         <button class="btn btn-outline-secondary" type="submit" id="submit">등록</button>
     </div>
 </div> 
+
+<!-- 첫번째 모달 -->
+<div id="first_modal" class="modal_overlay" style="position:fixed;">
+    <div class="modal_window">
+        <div style="display: flex; flex-direction: row; justify-content: space-between">
+            <div style="position:absolute; left: 44%;">
+                봉사 후기 추가
+            </div>
+            <div style="width:20px; height:20px; position:absolute; right: 5%" class="modal_close material-icons-outlined">
+                close
+            </div>
+        </div>
+        <div class="img_upload_space" style="position: absolute; top: 40px; line-height: 480px; text-align: center; border-top: solid 1px gray;width: 100%; height: 400px;">
+            새 이미지 업로드
+        </div>
+    </div>
+</div>
+
+<!-- 두번째 모달 -->
+<div id="second_modal" class="modal_overlay" style="position:fixed;">
+    <div class="modal_window">
+        <div style="display: flex; flex-direction: row; justify-content: space-between">
+            <div style="position:absolute; left: 44%;">
+                봉사 후기 추가
+            </div>
+            <div style="width:20px; height:20px; position:absolute; right: 5%" class="modal_close material-icons-outlined">
+                close
+            </div>
+        </div>
+
+        <div style="position: absolute; top: 40px; border-top: solid 1px gray;display: flex; flex-direction: row;margin-top: 10px; width:100%; height:90%;">
+            <div class="img_upload_space" style="width: 50%; height: 100%;">  
+            </div>
+            <div style="border-left: solid 1px gray; width: 49%; height: 95%;">
+                    <textarea id="input_feed_content" class="form-control" style="width: 100%; height: 100%;"
+                              id="exampleFormControlTextarea1" rows="5" placeholder="내용 작성"></textarea>
+                <button id="feed_create_button" type="button" class="btn btn-primary" style="width: 100%; background-color:gray; border-color:gray;">
+                    공유하기
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+</div>
 </body>
 </html>
 
@@ -230,5 +272,111 @@ $.ajax({
     })
 }
 );
+
+$(".modal_close").click(function () {
+    $('#first_modal').css({
+        display: 'none'
+    });
+    $('#second_modal').css({
+        display: 'none'
+    });
+});
+
+$('#nav_bar_add_box').click(function () {
+    $('#first_modal').css({
+        display: 'flex'
+    });
+
+    $(document.body).css({
+        overflow: 'hidden'
+    });
+
+});
+
+let files;
+
+$('#feed_create_button').click(function () {
+
+    let file = files[0];
+    let image = files[0].name;
+    let content = $('#input_feed_content').val();
+
+    let fd = new FormData();
+
+    fd.append('file', file);
+    fd.append('image', image);
+    fd.append('content', content);
+
+    $.ajax({
+        url: "/main/upload_feed",
+        data: fd,
+        method: "POST",
+        processData: false,
+        contentType: false,
+        success: function (data) {
+        },
+        error: function (request, status, error) {
+        },
+        complete: function () {
+            location.replace("/main/community");
+        }
+    });
+});
+
+$('.img_upload_space')
+    .on("dragover", dragOver)
+    .on("dragleave", dragOver)
+    .on("drop", uploadFiles);
+
+function dragOver(e) {
+    e.stopPropagation();
+    e.preventDefault();
+
+    if (e.type == "dragover") {
+        $(e.target).css({
+            "background-color": "black",
+            "outline-offset": "-20px"
+        });
+    } else {
+        $(e.target).css({
+            "outline-offset": "-10px"
+        });
+    }
+}
+
+function uploadFiles(e) {
+    e.stopPropagation();
+    e.preventDefault();
+
+    e.dataTransfer = e.originalEvent.dataTransfer; //2
+    files = e.target.files || e.dataTransfer.files;
+    console.log("뭔가 파일을 올렸네??" + files[0].name);
+    if (files.length > 1) {
+        alert('하나의 이미지 파일만 올려주세요.');
+        return;
+    }
+
+    if (files[0].type.match(/image.*/)) {
+
+        $('#first_modal').css({
+            display: 'none'
+        });
+        $('#second_modal').css({
+            display: 'flex'
+        });
+
+        $('.img_upload_space').css({
+            "background-image": "url(" + window.URL.createObjectURL(files[0]) + ")",
+            "outline": "none",
+            "background-size": "100%",
+            "background-repeat": "no-repeat",
+            "background-position": "center"
+        });
+    } else {
+        alert('해당 파일은 이미지가 아닙니다.');
+        return;
+    }
+
+}
 
 </script>

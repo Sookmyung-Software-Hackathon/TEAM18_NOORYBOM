@@ -88,6 +88,7 @@ input[type="search"]::placeholder {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
 .flex_item {
@@ -105,6 +106,8 @@ input[type="search"]::placeholder {
   border-width: 2px;
   border-top: solid #ffdef1;
   border-bottom: solid #ffdef1;
+  border-right: solid #d4d1cf;
+  border-left: solid #d4d1cf;
 }
 
 .modal_overlay {

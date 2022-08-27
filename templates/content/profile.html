@@ -34,15 +34,15 @@ crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light " style="position: fixed;width: 100%; display:block; z-index:10; background-color:rgba(255,255,255,0.5);">
+    <nav class="navbar navbar-expand-lg navbar-light " style="position: fixed;width: 100%; height: 60px; display:block; z-index:10; background-color:rgba(255,255,255,0.5);">
         <div class="container-fluid" style="justify-content: space-between;flex-wrap: nowrap; min-width: 1000px">
-            <div style="width: 600px; margin: 0 auto; display:flex; justify-content: center; padding-left: 290px;">
-                <a class="navbar-brand" href={% url "content:community"%}>
-                    <img style="width: 100px;"
+            <div style="width: 600px; margin: 0 auto; display:flex; justify-content: center; padding-left: 430px;">
+                <a class="navbar-brand" href={% url "content:main"%}>
+                    <img style="width: 100px;" 
                     src="../../media/누리봄.png">
                 </a>
             </div> 
-            <div style="display: flex">
+            <div style="display: flex;">
                 <a href={% url "content:community"%} style="text-decoration:none;color: black">커뮤니티</a>
                 &nbsp;  &nbsp;  &nbsp; 
                 <a href={% url "content:search"%} style="text-decoration:none;color: black">봉사 검색</a>
@@ -281,42 +281,40 @@ crossorigin="anonymous"></script>
 
 
 <!-- 첫번째 모달 -->
-<div id="first_modal" class="modal_overlay">
-    <div class="modal_window" style="width:700px; height:500px;">
+<div id="first_modal" class="modal_overlay" style="position:fixed;">
+    <div class="modal_window">
         <div style="display: flex; flex-direction: row; justify-content: space-between">
-          
-            <div>
+            <div style="position:absolute; left: 44%;">
                 봉사 후기 추가
             </div>
-                <span class="modal_close material-icons-outlined">close</span>
+            <div style="width:20px; height:20px; position:absolute; right: 5%" class="modal_close material-icons-outlined">
+                close
+            </div>
         </div>
-
-        <div class="img_upload_space" style="border-top: solid 1px gray;width: 680px; height: 400px;margin-top: 10px">
+        <div class="img_upload_space" style="position: absolute; top: 40px; line-height: 480px; text-align: center; border-top: solid 1px gray;width: 100%; height: 400px;">
             새 이미지 업로드
         </div>
     </div>
 </div>
 
 <!-- 두번째 모달 -->
-<div id="second_modal" class="modal_overlay">
-    <div class="modal_window" style="width:700px; height:500px;">
+<div id="second_modal" class="modal_overlay" style="position:fixed;">
+    <div class="modal_window">
         <div style="display: flex; flex-direction: row; justify-content: space-between">
-            <div>
+            <div style="position:absolute; left: 44%;">
                 봉사 후기 추가
             </div>
-                <span class="modal_close material-icons-outlined">close</span>
-
+            <div style="width:20px; height:20px; position:absolute; right: 5%" class="modal_close material-icons-outlined">
+                close
+            </div>
         </div>
 
-        <div style="border-top: solid 1px gray;display: flex; flex-direction: row;margin-top: 10px">
-            <div class="img_upload_space" style="width: 400px; height: 400px;">
-                
+        <div style="position: absolute; top: 40px; border-top: solid 1px gray;display: flex; flex-direction: row;margin-top: 10px; width:100%; height:90%;">
+            <div class="img_upload_space" style="width: 50%; height: 100%;">  
             </div>
-            <div style="border-left: solid 1px gray">
-                <div>
-                    <textarea id="input_feed_content" class="form-control" style="width: 276px; height: 400px"
+            <div style="border-left: solid 1px gray; width: 49%; height: 95%;">
+                    <textarea id="input_feed_content" class="form-control" style="width: 100%; height: 100%;"
                               id="exampleFormControlTextarea1" rows="5" placeholder="내용 작성"></textarea>
-                </div>
                 <button id="feed_create_button" type="button" class="btn btn-primary" style="width: 100%; background-color:gray; border-color:gray;">
                     공유하기
                 </button>
@@ -337,7 +335,8 @@ crossorigin="anonymous"></script>
         let item = document.getElementById("item").value;
         let admit_time = document.getElementById("admit_time").value;
         
-        $.ajax({
+        if (window.confirm("승인하시겠습니까?")){
+            $.ajax({
             url: "/main/profile",
             data: {
                 user : user,
@@ -353,6 +352,7 @@ crossorigin="anonymous"></script>
                 console.log("에러");
             }
         });
+        }
     });
 
     $("#button_feed_list").click(function (){
@@ -572,7 +572,7 @@ crossorigin="anonymous"></script>
         files = e.target.files || e.dataTransfer.files;
         console.log("뭔가 파일을 올렸네??" + files[0].name);
         if (files.length > 1) {
-            alert('하나만 올려라.');
+            alert('하나의 이미지 파일만 올려주세요.');
             return;
         }
 
@@ -593,14 +593,13 @@ crossorigin="anonymous"></script>
                 "background-position": "center"
             });
         } else {
-            alert('이미지가 아닙니다.');
+            alert('해당 파일은 이미지가 아닙니다.');
             return;
         }
 
     }
 
     $('#feed_create_button').click(function () {
-        alert("공유하기 눌렀다.");
 
         let file = files[0];
         let image = files[0].name;
@@ -619,13 +618,10 @@ crossorigin="anonymous"></script>
             processData: false,
             contentType: false,
             success: function (data) {
-                alert("성공");
             },
             error: function (request, status, error) {
-                alert("에러");
             },
             complete: function () {
-                alert("완료");
                 location.replace("/main/community");
             }
         });

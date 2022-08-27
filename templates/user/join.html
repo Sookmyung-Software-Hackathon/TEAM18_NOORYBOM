@@ -112,10 +112,8 @@ function sample5_execDaumPostcode() {
 
             // 주소 정보를 해당 필드에 넣는다.
             document.getElementById("sample5_address").value = addr;
-            alert("서비스 OK1");
             // 주소로 상세 정보를 검색
             geocoder.addressSearch(data.address, function(results, status) {
-                alert("서비스 OK2");
                 // 정상적으로 검색이 완료됐으면
                 if (status === daum.maps.services.Status.OK) {
                     var result = results[0]; //첫번째 결과의 값을 활용
@@ -154,8 +152,6 @@ function sample5_execDaumPostcode() {
         let name = $('#input_name').val();
         let role = $('#role').val();
         let residence = $('#sample5_address').val();
-
-        alert(residence)
 
         $.ajax({
             url: "/user/join",
