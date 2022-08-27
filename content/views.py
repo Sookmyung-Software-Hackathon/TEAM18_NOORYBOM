@@ -469,8 +469,8 @@ def feed_detail(request, feed_id):
     reply_object_list = Reply.objects.filter(feed_id=feed.id)
     reply_list = []
     for reply in reply_object_list:
-        user = User.objects.filter(email=reply.email).first()
-        reply_list.append(dict(reply_content=reply.reply_content,nickname=user.nickname))
+        reply_user = User.objects.filter(email=reply.email).first()
+        reply_list.append(dict(reply_content=reply.reply_content,nickname=reply_user.nickname))
     context = {"feed": feed, "nickname": user.nickname, "profile_image" : user.profile_image, "reply_list" : reply_list}
     return render(request, "content/feed_detail.html", context)
 
