@@ -186,9 +186,11 @@ crossorigin="anonymous"></script>
                     <div>{{volunteer.title}}</div>
                     {%if mainuser.role == 'User'%}
                         {%if volunteer.isparticipated%}
-                        <div id = "not_participate_volunteer" volunteer_id="{{ volunteer.id }}" class="not_participate_volunteer" style = "width: 35px; height: 35pxpx; position: absolute; right: 0px; background-color: green; cursor:pointer;">참여취소</div>
+                        <img id = "not_participate_volunteer" volunteer_id="{{ volunteer.id }}" class="not_participate_volunteer" style = "width: 25px; height: 25px; position: absolute; right: 0px; cursor:pointer;" 
+                        src="https://img.icons8.com/external-others-inmotus-design/344/external-Accept-check-others-inmotus-design-3.png">
                         {%else%}
-                        <div id = "participate_volunteer" volunteer_id="{{ volunteer.id }}" class="participate_volunteer" style = "width: 35px; height: 35pxpx; position: absolute; right: 0px; background-color: green; cursor:pointer;">참여하기</div>
+                        <img id = "participate_volunteer" volunteer_id="{{ volunteer.id }}" class="participate_volunteer" style = "width: 25px; height: 25px; position: absolute; right: 0px; cursor:pointer;"
+                        src="https://img.icons8.com/windows/344/unchecked-checkbox.png">
                         {%endif%}
                     {%endif%}
                 </div>
@@ -542,7 +544,7 @@ crossorigin="anonymous"></script>
 
     
     $(".not_participate_volunteer").click(function (event) {
-        if (window.confirm("해당 봉사에 불참여 하시겠습니까?")) {
+        if (window.confirm("해당 봉사에 참여하지 않겠습니까?")) {
             let volunteer_id = event.target.attributes.getNamedItem('volunteer_id').value;
             $.ajax({
             url: "/main/not_participate_volunteer",
