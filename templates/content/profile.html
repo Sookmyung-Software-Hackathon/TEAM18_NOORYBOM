@@ -237,7 +237,7 @@ crossorigin="anonymous"></script>
                 <div style="width: 850px; height: 100px; border: solid #D4D1CF; border-width:1.7px; border-radius: 20px;
                 margin: 20px auto; position: relative;">
                 <span style=" position: absolute; top: 35px; left: 30px;">{{outitem.0.title}}</span>
-                <span style=" position: absolute; top: 35px; left: 130px;">신청자 : {{outitem.1.nickname}}</span>
+                <span style=" position: absolute; top: 35px; left: 370px;">신청자 : {{outitem.1.nickname}}</span>
                 <button id ="grant" style="width: 100px; height: 30px; text-align: center; background-color: #FFDEF1; border-radius: 20px; 
                 line-height: 30px; position: absolute; right: 20px; top: 35px; color: #4D4D4D; border:0; outline:0;">승인하기</button>
                     <input type="hidden" id="user" value={{outitem.1.id}}></input>
@@ -387,7 +387,7 @@ crossorigin="anonymous"></script>
             color : 'black',
             fontWeight: 500
         });
-        $('#button_feed_list').css({
+        $('#button_feed_like_list').css({
             color : 'black',
             fontWeight: 500
         });
@@ -522,38 +522,6 @@ crossorigin="anonymous"></script>
             overflow: 'hidden'
         });
 
-    });
-
-    $('#feed_create_button').click(function () {
-        alert("게시물을 공유하였습니다.");
-
-        let file = files[0];
-        let image = files[0].name;
-        let content = $('#input_feed_content').val();
-
-        let fd = new FormData();
-
-        fd.append('file', file);
-        fd.append('image', image);
-        fd.append('content', content);
-
-        $.ajax({
-            url: "/main/upload",
-            data: fd,
-            method: "POST",
-            processData: false,
-            contentType: false,
-            success: function (data) {
-                console.log("성공");
-            },
-            error: function (request, status, error) {
-                console.log("에러");
-            },
-            complete: function () {
-                console.log("완료");
-                location.replace("/main");
-            }
-        });
     });
 
     $('.img_upload_space')

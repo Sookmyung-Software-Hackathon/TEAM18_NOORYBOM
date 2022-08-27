@@ -105,7 +105,11 @@
                 <div class="flex_item" style="width:250px; height:330px; margin: 20px; background-color: #FFFFFF; padding:10px; position:relative;">
                     <br/> <span style="position:relative; top:-15px; font-weight:bold;">{{a.0.title}} </span>
                     <img style="width: 230px; height: 150px;" src="{% get_media_prefix %}{{ a.0.volunteer_image }}"/><br/><br/>
-                    <span>  {{a.0.description}} </span> <br/>
+                    {%if a.0.description|length|get_digit:"-1" > 35  %}
+                    <span>  {{a.0.description | slice:"35"}}...</span> <br/>
+                    {%else%}
+                    <span>  {{a.0.description}}</span> <br/>
+                    {%endif%}
                     <!--<span id="detail_button" class="material-icons-outlined">add_box</span>-->
                     <span id="bookmark_{{ a.0.id }}" volunteer_id="{{ a.0.id }}" class="bookmark material-icons-outlined" style="cursor: pointer; 
                     position: absolute; right: 10px; bottom: 10px; ">

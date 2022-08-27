@@ -468,16 +468,19 @@ def feed_detail(request, feed_id):
     user = User.objects.filter(email=feed.email).first()
     reply_object_list = Reply.objects.filter(feed_id=feed.id)
     reply_list = []
+    is_liked=Like.objects.filter(feed_id=feed.id, email=user.email, is_like=True).exists()
+    print(is_liked)
     for reply in reply_object_list:
         reply_user = User.objects.filter(email=reply.email).first()
         reply_list.append(dict(reply_content=reply.reply_content,nickname=reply_user.nickname))
-    context = {"feed": feed, "nickname": user.nickname, "profile_image" : user.profile_image, "reply_list" : reply_list}
+    context = {"feed": feed, "nickname": user.nickname, "profile_image" : user.profile_image, "reply_list" : reply_list, "is_liked": is_liked}
     return render(request, "content/feed_detail.html", context)
 
 def volunteer_detail(request, feed_id):
     volunteeritem = get_object_or_404(VolunteerItem, pk = feed_id)
     user = User.objects.filter(email=volunteeritem.admin.email).first()
-    context = {"volunteeritem": volunteeritem, "nickname": user.nickname, "profile_image" : user.profile_image}
+    is_marked=Bookmark.objects.filter(feed_id=volunteeritem.id, email=user.email, is_marked=True).exists()
+    context = {"volunteeritem": volunteeritem, "nickname": user.nickname, "profile_image" : user.profile_image, "is_marked" : is_marked}
     return render(request, "content/volunteer_detail.html", context)
 
         
