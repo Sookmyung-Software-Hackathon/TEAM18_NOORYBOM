@@ -34,11 +34,14 @@ crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="position: fixed;width: 100%; z-index:10;">
+    <nav class="navbar navbar-expand-lg navbar-light " style="position: fixed;width: 100%; display:block; z-index:10; background-color:rgba(255,255,255,0.5);">
         <div class="container-fluid" style="justify-content: space-between;flex-wrap: nowrap; min-width: 1000px">
-            <a class="navbar-brand" href={% url "content:community"%}><img style="width: 100px"
-                                                    src="http://www.nuribom.co.kr/thema/T-Company/image/LOGO.png">
-            </a>
+            <div style="width: 600px; margin: 0 auto; display:flex; justify-content: center; padding-left: 290px;">
+                <a class="navbar-brand" href={% url "content:community"%}>
+                    <img style="width: 100px;"
+                    src="../../media/누리봄.png">
+                </a>
+            </div> 
             <div style="display: flex">
                 <a href={% url "content:community"%} style="color: black">커뮤니티</a>
                 &nbsp;  &nbsp;  &nbsp; 
@@ -152,19 +155,19 @@ crossorigin="anonymous"></script>
 
 <div style="border-top: solid 2px rgba(50,50,50,0.1); width: 1000px; margin: 20px auto;"> 
     <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; margin: 20px;">
-        {%if mainuser.ranking == 'Seed'%}
+        {%if mainuser.ranking == 'Seed💧'%}
         <div id="rank" style="color : #FFAAA5; cursor: pointer;margin: 0 30px;display: flex; flex-direction: row;align-items: center"><span class="material-icons-outlined">filter_vintage</span></div>
         {%endif%}
-        {%if mainuser.ranking == 'Sprout'%}
+        {%if mainuser.ranking == 'Sprout🌱'%}
             <div id="rank" style="color : #FFAAA5; cursor: pointer;margin: 0 30px;display: flex; flex-direction: row;align-items: center"><span class="material-icons-outlined">filter_vintage</span><span class="material-icons-outlined">filter_vintage</span></div>
         {%endif%}
-        {%if mainuser.ranking == 'Seedling'%}
+        {%if mainuser.ranking == 'Seedling🍃'%}
             <div id="rank" style="color : #FFAAA5; cursor: pointer;margin: 0 30px;display: flex; flex-direction: row;align-items: center"><span class="material-icons-outlined">filter_vintage</span><span class="material-icons-outlined">filter_vintage</span></div><span class="material-icons-outlined">filter_vintage</span>
         {%endif%}
-        {%if mainuser.ranking == 'Tree'%}
+        {%if mainuser.ranking == 'Tree🌲'%}
             <div id="rank" style="color : #FFAAA5; cursor: pointer;margin: 0 30px;display: flex; flex-direction: row;align-items: center"><span class="material-icons-outlined">filter_vintage</span><span class="material-icons-outlined">filter_vintage</span><span class="material-icons-outlined">filter_vintage</span><span class="material-icons-outlined">filter_vintage</span></div>
         {%endif%}
-        {%if mainuser.ranking == 'Flower'%}
+        {%if mainuser.ranking == 'Flower🌸'%}
             <div id="rank" style="color : #FFAAA5; cursor: pointer;margin: 0 30px;display: flex; flex-direction: row;align-items: center"><span class="material-icons-outlined">filter_vintage</span><span class="material-icons-outlined">filter_vintage</span><span class="material-icons-outlined">filter_vintage</span><span class="material-icons-outlined">filter_vintage</span><span class="material-icons-outlined">filter_vintage</span></div>
         {%endif%}
 
