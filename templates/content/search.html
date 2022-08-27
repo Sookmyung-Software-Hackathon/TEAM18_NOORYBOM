@@ -70,30 +70,31 @@
 </nav>
 
 
-<body style="background-color : #B0FDB3;">
-    <div style="width:100%; height: 200px; background-color:#B0FDB3;padding:200px;">
+<body style="background-color : #FFFFFF;">
+    <div style="width:100%; height: 200px; background-color:#F2F2F2;padding:200px;">
         <div class="searchBar">
-        <input id="searchbox" type="search" placeholder="봉사기관/봉사명을 입력하세요" 
-        style="width:500px;height:75px;"></input>
-        <button id="search_button" class="button"><img src="https://img.icons8.com/external-flat-icons-inmotus-design/344/external-Search-round-mobile-ui-set-flat-icons-inmotus-design-2.png" style="width: 75px;
-                height: 75px; border:none"></button>
+        <input id="searchbox" type="search" placeholder="   봉사기관 / 봉사명을 입력하세요" 
+        style="width:750px;height:75px;"></input>
+        <button id="search_button" class="button"><img src="../../media/outline_search_white_24dp.png" style="width: 65px;
+                height: 65px; border:none"></button>    
         </div>
     </div>
 
     <section id="vol_section">
         <div class="search_result">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#FFDEF1" class="bi bi-check-lg" viewBox="0 0 16 16">
             <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
           </svg>검색 결과</div><br>
    <div class="flex_container">
     {%if bookmark_volunteer_list%}
         {%for item in bookmark_volunteer_list%}
             {%for a in item%}
-                <div class="flex_item" style="width:150px; height:150px; margin: 20px; background-color:white;">
-                    <div>지역 : {{a.0.region}}</div>
-                    <div>내용 : {{a.0.description}}</div>
+                <div class="flex_item" style="width:200px; height:220px; margin: 20px; background-color: #FFFFFF; padding:10px; position:relative;">
+                    <br/> <span>{{a.0.title}} </span> <br/> <br/>
+                    <span>  {{a.0.description}} </span> <br/>
                     <!--<span id="detail_button" class="material-icons-outlined">add_box</span>-->
-                    <span id="bookmark_{{ a.0.id }}" volunteer_id="{{ a.0.id }}" class="bookmark material-icons-outlined" style="cursor: pointer">
+                    <span id="bookmark_{{ a.0.id }}" volunteer_id="{{ a.0.id }}" class="bookmark material-icons-outlined" style="cursor: pointer; 
+                    position: absolute; right: 10px; bottom: 10px; ">
                         {% if a.1 %}
                         bookmark
                         {% else %}
@@ -104,7 +105,7 @@
             {%endfor%}
         {% endfor %}
     {%endif%}
-            
+    </div>       
 </div>
     
     </section>

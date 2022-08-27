@@ -17,23 +17,35 @@
   height: 90px;
   padding: 5px;
   margin: 0 auto;
+
 }
 #searchbox {
-  position: absolute;
+  /*position: absolute;
   top: 10px;
   left: 12px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-style: none;
   background-color: white;
-  align-items: center;
+  align-items: center;*/
+  position: absolute;
+  box-sizing: border-box;
+  font-size: 20px;
+  border-radius: 50px;
+  border-style: none;
+  right: 5px;
+  box-shadow: 0px 4px 4px #FFC7DF;
+  background: rgba(255,255,255,1);
 }
 
 .button {
   position: absolute;
   top: 10px;
-  right: 10px;
+  right: -80px;
+  height: 75px;
+  width: 75px;
   border-style: none;
-  background-color: #b0fdb3;
+  background-color: #FFC7DF;
+  border-radius: 100%; 
 }
 
 input[type="search"]::placeholder {
@@ -41,6 +53,10 @@ input[type="search"]::placeholder {
 }
 
 .search_result {
+  position: absolute;
+  top: 420px;
+  /*left: 650px;*/
+
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
@@ -49,17 +65,20 @@ input[type="search"]::placeholder {
   display: flex;
   align-items: center;
   text-align: center;
-
-  color: #000000;
+  border-width: 2px;
+  border-top: solid #FFDEF1;
+  border-bottom: solid #FFDEF1;
+  justify-content: center;
+  
+  color: #4D4D4D;
   background-color: white;
-  height: 30px;
-  width: 110px;
-  border-style: none;
-  border-radius: 5px;
+  height: 50px;
+  width: 100%;
+  border-radius: 10px;
 }
 
 #vol_section {
-  background-color: #b0fdb3;
+  background-color: white;
 }
 
 .recommend {
@@ -67,19 +86,29 @@ input[type="search"]::placeholder {
   border-style: none;
 }
 .flex_container {
-  width: 100%;
-  height: 100%;
+
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  align-content: flex-start;
+
 }
+
 .flex_item {
   background-color: white;
   border-style: none;
   width: 50px;
   height: 50px;
   margin: 10px;
+  border-radius: 10px;
+
+  position: relative;
+  top: 50px;
+  left: 50px;
+
+  border-width: 2px;
+  border-top: solid #FFDEF1;
+  border-bottom: solid #FFDEF1;
+
 }
 
 .modal_overlay {
