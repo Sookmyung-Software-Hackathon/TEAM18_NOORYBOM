@@ -90,12 +90,30 @@ crossorigin="anonymous"></script>
             <span class="material-icons-outlined" style="margin-right: 40px">settings</span>
         </div>
 
-        <div style="margin-bottom: 20px">
+        <div id="click_follow" style="margin-bottom: 20px">
             내 게시물건수 <br/>
-            팔로워 {{ mainuser.followings.count }} 팔로잉 {{mainuser.followers.all|length}}<br/>
+            <span style="height:30px;"id="follow_open">팔로워 {{ mainuser.followings.count }} 팔로잉 {{mainuser.followers.all|length}}</span>
+            <div id="follow" style="display:none;">
+                <div style="width: 600px; position: fixed; background-color:green; z-index: 1;">
+                    <div id="follow_close" style="width:600px; height:30px; background-color:yellow;">XXXXXXXXXXXXXXXXXXX</div>
+                    {{mainuser.followers.id}}
+                    {%for user in user_list%}
+                        {%if user.id != mainuser.id%}
+                        <div style="width: 600px; height: 30px;"> 
+                            <span>{{user.name}}</span>
+                            {%if user in mainuser.followers.all%}
+                                <button user = {{user.email}} class="follow">팔로우 취소</button>
+                            {%else%}
+                                <button user = {{user.email}} class="follow">팔로우</button>
+                            {%endif%}
+                        </div>
+                        {%endif%}
+                    {% endfor %}
+                </div>   
+            </div>
             {%if mainuser.role == 'User'%}
-                티어 {{mainuser.ranking}}
-                총 봉사 시간 {{mainuser.sum_time}}
+                <br/>티어 {{mainuser.ranking}}
+                <br/>총 봉사 시간 {{mainuser.sum_time}}
             {%endif%}
         </div>
         <div>
@@ -256,14 +274,11 @@ crossorigin="anonymous"></script>
 </div>
 
 
-
-
 <!-- 첫번째 모달 -->
 <div id="first_modal" class="modal_overlay">
     <div class="modal_window">
         <div style="display: flex; flex-direction: row; justify-content: space-between">
             <div style="width: 40px; background: gray">
-
             </div>
             <div>
                 새 이미지 업로드
@@ -312,6 +327,9 @@ crossorigin="anonymous"></script>
 
     </div>
 </div>
+</body>
+</html>
+
 
 <!-- Optional JavaScript; choose one of the two! -->
 <script>
@@ -542,10 +560,34 @@ crossorigin="anonymous"></script>
 
     }
 
+    $('#follow_open').click(function () {
+        $('#follow').css({
+            display: 'flex'
+        });
+    });
 
+    $('#follow_close').click(function () {
+        $('#follow').css({
+            display: 'none'
+        });
+    });
+
+    $(".follow").click(function (event) {
+        let follow_email = event.target.attributes.getNamedItem("user").value;
+        alert(follow_email)
+        $.ajax({
+            url: "/main/test",
+            data: {
+                follow_email: follow_email
+            },
+            method: "POST",
+            success: function (data) {
+                console.log("성공");
+                location.replace("/main/profile");
+            },
+            error: function (request, status, error) {
+                console.log("에러");
+            },
+        });
+    })
 </script>
-
-</body>
-
-
-</html>

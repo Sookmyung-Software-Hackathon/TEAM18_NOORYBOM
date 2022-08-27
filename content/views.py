@@ -186,11 +186,14 @@ class Profile(APIView):
         like_feed_list = Feed.objects.filter(id__in=like_list)
         bookmark_list = list(Bookmark.objects.filter(email=email, is_marked=True).values_list('feed_id', flat=True))
         bookmark_volunteer_list = VolunteerItem.objects.filter(id__in=bookmark_list)
+
+        user_list = User.objects.order_by('id')
         return render(request, 'content/profile.html', context=dict(feed_list=feed_list,
                                                                     like_feed_list=like_feed_list,
                                                                     bookmark_volunteer_list=bookmark_volunteer_list,
                                                                     mainuser = mainuser,
                                                                     participate_list=participate_list,
+                                                                    user_list =user_list
                                                                 ))
 
     def post(self, request):
@@ -432,7 +435,6 @@ class Follow(APIView):
     def get(self, request):
         email = request.session.get('email', None)
         mainuser = User.objects.filter(email=email).first()
-        print("get")
         user_list = User.objects.order_by('id')
         
         return render(request, "content/test.html",context=dict(user_list=user_list, mainuser=mainuser))
