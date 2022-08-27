@@ -282,49 +282,42 @@ crossorigin="anonymous"></script>
 
 <!-- 첫번째 모달 -->
 <div id="first_modal" class="modal_overlay">
-    <div class="modal_window">
+    <div class="modal_window" style="width:700px; height:500px;">
         <div style="display: flex; flex-direction: row; justify-content: space-between">
-            <div style="width: 40px; background: gray">
-            </div>
+          
             <div>
-                새 이미지 업로드
+                봉사 후기 추가
             </div>
-            <div style="width: 40px; background: gray">
                 <span class="modal_close material-icons-outlined">close</span>
-            </div>
         </div>
 
-        <div class="img_upload_space" style="border-top: solid 1px gray;width: 778px; height: 540px;margin-top: 10px">
-
+        <div class="img_upload_space" style="border-top: solid 1px gray;width: 680px; height: 400px;margin-top: 10px">
+            새 이미지 업로드
         </div>
     </div>
 </div>
 
 <!-- 두번째 모달 -->
 <div id="second_modal" class="modal_overlay">
-    <div class="modal_window">
+    <div class="modal_window" style="width:700px; height:500px;">
         <div style="display: flex; flex-direction: row; justify-content: space-between">
-            <div style="width: 40px; background: gray">
-
-            </div>
             <div>
-                새 이미지 업로드
+                봉사 후기 추가
             </div>
-            <div style="width: 40px; background: gray">
                 <span class="modal_close material-icons-outlined">close</span>
-            </div>
+
         </div>
 
         <div style="border-top: solid 1px gray;display: flex; flex-direction: row;margin-top: 10px">
-            <div class="img_upload_space" style="width: 500px; height: 540px;">
-
+            <div class="img_upload_space" style="width: 400px; height: 400px;">
+                
             </div>
             <div style="border-left: solid 1px gray">
                 <div>
                     <textarea id="input_feed_content" class="form-control" style="width: 276px; height: 400px"
-                              id="exampleFormControlTextarea1" rows="5"></textarea>
+                              id="exampleFormControlTextarea1" rows="5" placeholder="내용 작성"></textarea>
                 </div>
-                <button id="feed_create_button" type="button" class="btn btn-primary" style="width: 100%">
+                <button id="feed_create_button" type="button" class="btn btn-primary" style="width: 100%; background-color:gray; border-color:gray;">
                     공유하기
                 </button>
             </div>
