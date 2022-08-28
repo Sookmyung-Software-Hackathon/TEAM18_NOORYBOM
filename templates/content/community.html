@@ -130,6 +130,11 @@ crossorigin="anonymous"></script>
                                     </div>
                                     <div style="padding:10px">{{ feed.nickname }}</div>
                                     {%if feed.nickname == mainuser.nickname%}
+                                        <a href="javascript:void(window.open('get_update_feed/{{feed.id}}','_blank','width=500,height=700'))" style="text-decoration:none; position:absolute; right: 30px;">
+                                            <div id="update_feed" style="width: 40px; height: 20px; color:gray;">
+                                                <img style="width:20px; height:20x; position:relative; top: -5px;" src="https://cdn-icons-png.flaticon.com/512/5372/5372190.png"/>
+                                            </div>
+                                        </a>
                                         <img src="https://img.icons8.com/windows/344/trash.png" id = "deletebox_feed" feed_id="{{ feed.id }}" class="deletebox_feed" style="position: absolute; right: 0px; cursor:pointer; width : 25px; height : 25px">
                                     {%endif%}
                             </div>
@@ -385,7 +390,7 @@ crossorigin="anonymous"></script>
             success: function (data) {
                 console.log("성공");
                 $("#reply_list_" + feed_id).append("<div style='margin: 0 20px;text-align: left;font-size: 14px'><b>{{ mainuser.nickname }}</b> " + reply_content + "</div>")
-                {#location.replace('/community');#}
+                location.replace('/community');
 
             },
             error: function (request, status, error) {
@@ -588,7 +593,7 @@ crossorigin="anonymous"></script>
                     console.log("완료");
                 }
             });
-          }
+        }
     });
 
     $('#select_feed').click(function () {

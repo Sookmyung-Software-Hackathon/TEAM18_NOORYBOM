@@ -13,6 +13,7 @@ from . import config
 import math
 import collections
 from django.shortcuts import get_object_or_404
+from django.http import HttpResponse
 
 class Community(APIView):
     def get(self, request):
@@ -42,6 +43,7 @@ class Community(APIView):
             like_count=Like.objects.filter(feed_id=feed.id, is_like=True).count()
             is_liked=Like.objects.filter(feed_id=feed.id, email=email, is_like=True).exists()
             feed_list.append(dict(id=feed.id,
+                                email = feed.email,
                                 image=feed.image,
                                 content=feed.content,
                                 like_count=like_count,
@@ -483,4 +485,29 @@ def volunteer_detail(request, feed_id):
     context = {"volunteeritem": volunteeritem, "nickname": user.nickname, "profile_image" : user.profile_image, "is_marked" : is_marked}
     return render(request, "content/volunteer_detail.html", context)
 
-        
+def get_update_feed(request, feed_id):
+    feed = get_object_or_404(Feed, pk = feed_id)
+    user = User.objects.filter(email=feed.email).first()
+    reply_object_list = Reply.objects.filter(feed_id=feed.id)
+    reply_list = []
+    is_liked=Like.objects.filter(feed_id=feed.id, email=user.email, is_like=True).exists()
+    for reply in reply_object_list:
+        reply_user = User.objects.filter(email=reply.email).first()
+        reply_list.append(dict(reply_content=reply.reply_content,nickname=reply_user.nickname))
+    context = {"feed": feed, "nickname": user.nickname, "profile_image" : user.profile_image, "reply_list" : reply_list, "is_liked": is_liked, "email" : user.email}
+    return render(request, "content/feed_update.html", context)
+
+class PutFeed(APIView):
+    def put(self, request):
+        print(request.data)
+        feed_id = request.data.get('feed_id')
+        content = request.data.get('content')
+        feed = get_object_or_404(Feed, pk = feed_id)
+        feed.content = content
+
+        print(feed)
+        print(content)
+
+        feed.save()
+
+        return Response(status=200)
