@@ -50,11 +50,11 @@ django / html / css / javascript
 
 ## 💮 ERD
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c5b56df3-ee12-477f-80d0-151a53d21aa4/Untitled.png)
+![noorybom ERD](https://user-images.githubusercontent.com/81565724/187066179-5612a3ff-0fc8-4471-bfb5-f7740dc6eb55.png)
 
 ## 💮 FLOW CHART
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b19ff1ea-3ca7-4207-88ba-5605d9eed405/Untitled.png)
+![noorybom flowchart](https://user-images.githubusercontent.com/81565724/187066186-63fd391c-2732-4593-8d92-d2d5b53750a8.png)
 
 ## 💮 참고 문헌
 
