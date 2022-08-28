@@ -56,7 +56,7 @@ django / html / css / javascript
 
 ## 💮 FLOW CHART
 
-![noorybom flowchart](https://user-images.githubusercontent.com/81565724/187066186-63fd391c-2732-4593-8d92-d2d5b53750a8.png)
+![noorybom flowchart](https://user-images.githubusercontent.com/81565724/187068262-32bea738-09a7-410b-b67b-85b86c3e9d4e.png)
 
 ## 💮 참고 문헌
 
