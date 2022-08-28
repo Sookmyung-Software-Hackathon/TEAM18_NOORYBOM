@@ -63,7 +63,7 @@ crossorigin="anonymous"></script>
             <div style="border:solid 1px rgba(219, 219, 219, 1);padding:10px; height:150px; overflow-y:auto;">{{feed.content}}</div>    
             <div style="color:gray;"><b>댓글</b></div>
             <!-- 댓글 부분 -->
-            <div style="padding-top:2px;padding-left:2px;overflow-y:auto;height:150px;" id="reply_list_{{ feed.id }}">
+            <div style="padding-top:2px;padding-left:2px;overflow-y:auto;height:100px;" id="reply_list_{{ feed.id }}">
                 {% for reply in reply_list %}
                     <div style="margin: 0 auto; text-align: left; font-size: 14px; border-top : solid 1px rgba(219, 219, 219, 1)">
                         <b style="margin : 5px">{{ reply.nickname }}</b> {{ reply.reply_content }}</div>
