@@ -28,6 +28,24 @@
         font-family: 'GangwonEdu_OTFBoldA';
       }
 
+      .nav_box {
+        position:absolute; 
+        width:230px; 
+        height:40px; 
+        top:80%; 
+        left:50%; 
+        margin: 0 auto; 
+        transform:translate(-50%, -50%); 
+        border : 1px solid #FFDEF1;
+        border-radius : 25px;
+        background-color:none;
+        color:#FFDEF1;
+        text-align:center;
+        font-size:25px;
+        font-family: 'GangwonEdu_OTFBoldA';
+        align-items:center;
+        padding:7px;
+      }
       @font-face {
         font-family: 'GangwonEdu_OTFBoldA';
         src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
@@ -42,9 +60,19 @@
       font-style: normal;
   }
 
-  * {
-      font-family: 'Pretendard-Regular';
-  }
+    #wrapper{
+      height: auto;
+      min-height: 100%;
+      padding-bottom: 10px;
+      background-color:#fffaf0;
+    }
+    footer{
+      height: 10px;
+      position : fixed;
+      bottom:0;
+      transform : translateY(-100%);
+      background-color:#fffaf0;
+    }
 
     </style>
     <meta charset="UTF-8">
@@ -92,8 +120,7 @@
   <div style="width:100%;margin:0 auto; position:relative"><img src="../media/배경화면.jpg" style="width:100%; vertical-align:middle;">
     <div class="middle_box"><a style="font-size:20px">세상을 봄처럼 희망있게 가꾸는 봉사 누리집 :</a> <br>누리봄</div>
   </div>
-    <div style="height: 100px;"></div>
-      <div id="grid" style="width:1200px; margin: 0 auto;">
+      <div id="grid">
           <span align="center" onClick="location.href='{% url "content:profile"%}'" style="width:auto;">
               <img src="../../media/마이페이지.png" width="100px" alt="" style="cursor:pointer;">
               <br/><br/><div style="width: 400px; text-align:center;font-weight: 600;">마이페이지</div>
@@ -107,15 +134,15 @@
               <br/><br/><div style="width: 400px; text-align:center;font-weight: 600;">커뮤니티</div>
           </span>
       </div>
-      <div style="height: 50px;"></div>
-      <div style="width:1200px; height: auto; margin: 0 auto;padding:30px; display:flex;justify-content:space-around;">
+      <div style="width:100%; height: auto; background-color:#fffaf0; padding:30px; display:flex;justify-content:space-around;">
         <div>
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/fU1TI3ZRnJw" title="YouTube video player" frameborder="0"
+          <div style="text-align:center;font-family: 'Pretendard-Regular'; color: #4D4D4D; padding-bottom:5px; font-size:20px">오늘의 영상</div>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/ugxneQ8Uiu0" title="YouTube video player" frameborder="0"
            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div style="margin-left:20px;">  
-          <div style="margin-bottom:20px;text-align:center;font-weight: 600;">오늘의 봉사 지식</div>
-            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="">
+          <div style="margin-bottom:20px;text-align:center; font-family: 'Pretendard-Regular'; color: #4D4D4D; font-size:20px">오늘의 봉사 지식</div>
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="height:200px; border:1px solid gray">
                 <div class="carousel-inner">
                   <div class="carousel-item active">
                     <img class="slide" src="../media/main_pic01.png" class="d-block w-100" alt="...">
@@ -153,13 +180,12 @@
             </div>
           </div>
         </div>
-        <div id='wrapper'>
-          <div style="font-size:10px; text-align:center;color:black;opacity: 0.7; margin-top:200px">
-            Copyright 2022 숙명여대 해커톤 김나영,김민경,박수아,백주영 
-          </div>
-        </div>
-        <footer></footer>
-  
+        
 </body>
-
+<div id='wrapper'>
+  <div style="font-size:10px; text-align:center;color:black;opacity: 0.7; padding:10px">
+    Copyright 2022 숙명여대 해커톤 김나영,김민경,박수아,백주영 
+  </div>
+</div>
+<footer></footer>
 </html>
