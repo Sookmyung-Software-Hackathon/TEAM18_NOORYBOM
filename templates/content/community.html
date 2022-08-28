@@ -130,69 +130,69 @@ crossorigin="anonymous"></script>
         </ul>
         <div class="tab-content">
             <div class="feed_boxes tab-pane fade show active" style="width: 1200px; margin: 0 auto; display:flex; flex-wrap: wrap;" id="review">
-                <!-- 여기서부터 피드박스 -->
-                <div id = "volunteer_review_content" style="width:1200px; display:flex; flex-wrap:wrap;">
-                    {% for feed in feeds %}
-                    <div style="position:relative;">
-                        <div id = "select_review" feed_id="{{feed.id}}" style="width: 250px; height:350px; margin: 20px; border:0; box-shadow: 0px 2px 2px 0px gray; border-radius: 5%;"> 
-                            <div class="feed_box" style="border:none">
-                                <div style="display: flex; flex-wrap: wrap; flex-direction: row; align-items: center; margin: 20px;">
-                                    <div class="box" style="width: 25px; height: 25px ">
-                                        <img class="profile" src="{% get_media_prefix %}{{ feed.profile_image }}">
-                                    </div>
-                                    <div style="padding:10px">{{ feed.nickname }}</div>
-                                    {%if feed.nickname == mainuser.nickname%}
-                                        <img src="https://img.icons8.com/windows/344/trash.png" id = "deletebox_feed" feed_id="{{ feed.id }}" class="deletebox_feed" style="position: absolute; right: 30px; cursor:pointer; width : 25px; height : 25px">
-                                    {%endif%}
+               <!-- 여기서부터 피드박스 -->
+               <div id = "volunteer_review_content" style="width:1200px; display:flex; flex-wrap:wrap;">
+                {% for feed in feeds %}
+                <div style="position:relative;">
+                    <div id = "select_review" feed_id="{{feed.id}}" style="width: 250px; height:350px; margin: 20px; border:0; box-shadow: 0px 2px 2px 0px gray; border-radius: 5%;"> 
+                        <div class="feed_box" style="border:none">
+                            <div style="display: flex; flex-wrap: wrap; flex-direction: row; align-items: center; margin: 20px;">
+                                <div class="box" style="width: 25px; height: 25px ">
+                                    <img class="profile" src="{% get_media_prefix %}{{ feed.profile_image }}">
                                 </div>
-                            <div>
-                                <a href="javascript:void(window.open('feed_detail/{{feed.id}}','_blank','width=500,height=700'))">
-                                <img style="width: 100%; max-height:200px;" src="{% get_media_prefix %}{{ feed.image }}">
-                                </a>
-                            </div>
-                            <div style="margin: 10px 0px; display: flex; flex-direction: row; justify-content: space-between">
-                            <div style="position:absolute; bottom:70px;">
-                                <span id="favorite_{{ feed.id }}" feed_id="{{ feed.id }}"
-                                    class="favorite material-icons-outlined"
-                                    style="color: red;cursor: pointer;">
-                                    {% if feed.is_liked %}
-                                    favorite
-                                    {% else %}
-                                    favorite_border
-                                    {% endif %}
-                                </span>
-                            </div>
-                            <div style="text-align: left;font-size: 16px; position:absolute; left:-20px; bottom:30px;">
-                                <b>{{ feed.nickname }}</b> 
-                                {%if feed.content|length|get_digit:"-1" > 35  %}
-                                    {{ feed.content | slice:"22"}}...
-                                {%else%}
-                                    {{ feed.content}}
+                                <div style="padding:10px">{{ feed.nickname }}</div>
+                                {%if feed.nickname == mainuser.nickname%}
+                                    <img src="https://img.icons8.com/windows/344/trash.png" id = "deletebox_feed" feed_id="{{ feed.id }}" class="deletebox_feed" style="position: absolute; right: 30px; cursor:pointer; width : 25px; height : 25px">
                                 {%endif%}
                             </div>
+                        <div>
+                            <a href="javascript:void(window.open('feed_detail/{{feed.id}}','_blank','width=500,height=700'))">
+                            <img style="width: 100%; max-height:200px;" src="{% get_media_prefix %}{{ feed.image }}">
+                            </a>
+                        </div>
+                        <div style="margin: 10px 10px; display: flex; flex-direction: row; justify-content: space-between">
+                        <div style="position:absolute; bottom:70px;">
+                            <span id="favorite_{{ feed.id }}" feed_id="{{ feed.id }}"
+                                class="favorite material-icons-outlined"
+                                style="color: red;cursor: pointer;">
+                                {% if feed.is_liked %}
+                                favorite
+                                {% else %}
+                                favorite_border
+                                {% endif %}
+                            </span>
+                        </div>
+                        <div style="text-align: width:240px; left;font-size: 16px; position:absolute; left: 17px; bottom:30px;">
+                            <b>{{ feed.nickname }}</b> 
+                            {%if feed.content|length|get_digit:"-1" > 35  %}
+                                {{ feed.content | slice:"22"}}...
+                            {%else%}
+                                {{ feed.content}}
+                            {%endif%}
                         </div>
                     </div>
                 </div>
-                
-                        {% comment %} <!-- 댓글 부분 -->
-                        <div id="reply_list_{{ feed.id }}">
-                            {% for reply in feed.reply_list %}
-                                <div style="margin: 0 20px;text-align: left;font-size: 14px">
-                                    <b>{{ reply.nickname }}</b> {{ reply.reply_content }}</div>
-                            {% endfor %}
-                        </div>
-                        <div style="display:flex;flex-direction: row;align-items: center; border-top: solid 1px gray ">
-                            <input id="reply_{{ feed.id }}" type="text" class="form-control"
-                                style="box-shadow: none; border: none; outline: none"
-                                placeholder="댓글 달기..">
-                            <div feed_id="{{ feed.id }}" class="upload_reply"
-                                style="width: 50px;color: cornflowerblue; font-weight: bold">
-                                게시
-                            </div>
-                        </div>  {% endcomment %}
+            </div>
+            
+                    {% comment %} <!-- 댓글 부분 -->
+                    <div id="reply_list_{{ feed.id }}">
+                        {% for reply in feed.reply_list %}
+                            <div style="margin: 0 20px;text-align: left;font-size: 14px">
+                                <b>{{ reply.nickname }}</b> {{ reply.reply_content }}</div>
+                        {% endfor %}
                     </div>
-                {% endfor %}
+                    <div style="display:flex;flex-direction: row;align-items: center; border-top: solid 1px gray ">
+                        <input id="reply_{{ feed.id }}" type="text" class="form-control"
+                            style="box-shadow: none; border: none; outline: none"
+                            placeholder="댓글 달기..">
+                        <div feed_id="{{ feed.id }}" class="upload_reply"
+                            style="width: 50px;color: cornflowerblue; font-weight: bold">
+                            게시
+                        </div>
+                    </div>  {% endcomment %}
                 </div>
+            {% endfor %}
+            </div>
 </div>
 <!-- 여기까지 피드박스 -->
 
