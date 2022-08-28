@@ -106,7 +106,7 @@
     </div>
     <div class="input-group mb-3" style="width:100%">
         <span class="input-group-text" id="basic-addon1">봉사 날짜</span>
-        <input id="date" type="date" class="form-control" aria-describedby="basic-addon1">
+        <input id="Date" type="date" class="form-control" aria-describedby="basic-addon1">
     </div>
     <div class="input-group mb-3" style="width:100%">
         <span class="input-group-text" id="basic-addon1">봉사 시간</span>
@@ -207,7 +207,12 @@
 
 <form>
 <script>
-
+    var now_utc = Date.now() // 지금 날짜를 밀리초로
+    // getTimezoneOffset()은 현재 시간과의 차이를 분 단위로 반환
+    var timeOff = new Date().getTimezoneOffset()*60000; // 분단위를 밀리초로 변환
+    // new Date(now_utc-timeOff).toISOString()은 '2022-05-11T18:09:38.134Z'를 반환
+    var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+    document.getElementById("Date").setAttribute("min", today);
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
     mapOption = {
         center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
