@@ -162,7 +162,7 @@ crossorigin="anonymous"></script>
                                     {% endif %}
                                 </span>
                             </div>
-                            <div style="text-align: left;font-size: 16px; position:absolute; bottom:30px;">
+                            <div style="text-align: left;font-size: 16px; position:absolute; left:-20px; bottom:30px;">
                                 <b>{{ feed.nickname }}</b> 
                                 {%if feed.content|length|get_digit:"-1" > 35  %}
                                     {{ feed.content | slice:"22"}}...
