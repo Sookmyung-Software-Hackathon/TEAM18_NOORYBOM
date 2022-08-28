@@ -43,9 +43,19 @@
         font-weight: 400;
         font-style: normal;
     }
-
+  
     * {
         font-family: 'Pretendard-Regular';
+    }
+    #wrapper{
+        height: auto;
+        min-height: 100%;
+        padding-bottom: 10px;
+      }
+      footer{
+        height: 10px;
+        position : relative;
+        transform : translateY(-100%);
       }
 </style>
 
@@ -88,7 +98,7 @@
         </div>
     </nav>
 
-<div style="width:50%; margin: 70px auto;">
+<div style="width:50%; margin: 70px auto; text-align:center;">
     <h4>봉사를 추가해주세요.</h4>
     <div class="input-group mb-3" style="width:100%">
         <span class="input-group-text" id="basic-addon1">제목</span>
@@ -125,10 +135,6 @@
     </div>
    <div class="input-group mb-3" style="width:100%">
         <input type="file" class="custom-file-input file form-control" id="file">
-    </div>
-    <div class="input-group mb-3" style="width:100%">
-        <span class="input-group-text" id="basic-addon1">봉사 인정 시간</span>
-        <input id="admit_time" type="number" class="form-control" aria-describedby="basic-addon1">
     </div>
     <div><input style="display:none" id="user" type="text" value={{mainuser.email}}/></div>
     <div class="input-group mb-3" style="width: 100px; margin: 0 auto;">
@@ -181,6 +187,12 @@
     </div>
 </div>
 </body>
+<div id='wrapper'>
+    <div style="font-size:10px; text-align:center;color:black;opacity: 0.7; margin-top:20px">
+      Copyright 2022 숙명여대 해커톤 김나영,김민경,박수아,백주영 
+    </div>
+  </div>
+  <footer></footer>
 </html>
 
 <form>

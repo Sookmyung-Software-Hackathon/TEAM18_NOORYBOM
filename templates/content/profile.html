@@ -44,6 +44,16 @@ crossorigin="anonymous"></script>
     * {
         font-family: 'Pretendard-Regular';
     }
+    #wrapper{
+        height: auto;
+        min-height: 100%;
+        padding-bottom: 10px;
+      }
+      footer{
+        height: 10px;
+        position : relative;
+        transform : translateY(-100%);
+      }
 </style>
 
 <body>
@@ -254,7 +264,7 @@ crossorigin="anonymous"></script>
 <div id="feed_list" style="width: 100%; min-width: 1000px; display: none; align-items: center;justify-content: center">
     <div style="display: flex; flex-direction: row; flex-wrap: wrap; width: 1000px; justify-content: center">
         {% for feed in feed_list %}
-        <a href="feed_detail/{{feed.id}}">
+        <a href="javascript:void(window.open('feed_detail/{{feed.id}}','_blank','width=500,height=700'))">
             <div style="width: 300px;height: 300px; margin: 10px 5px 0px 5px;">
                 <div><img style="width: 300px;height: 300px; object-fit: cover" src="{% get_media_prefix %}{{ feed.image }}">
                 </div>
@@ -267,7 +277,7 @@ crossorigin="anonymous"></script>
 <div id="like_feed_list" style="width: 100%; min-width: 1000px; display: none; align-items: center;justify-content: center">
     <div style="display: flex; flex-direction: row; flex-wrap: wrap; width: 1000px; justify-content: center">
         {% for feed in like_feed_list %}
-        <a href="feed_detail/{{feed.id}}">
+        <a href="javascript:void(window.open('feed_detail/{{feed.id}}','_blank','width=500,height=700'))">
             <div style="width: 300px;height: 300px; margin: 10px 5px 0px 5px;">
                 <div><img style="width: 300px;height: 300px; object-fit: cover"
                           src="{% get_media_prefix %}{{ feed.image }}">
@@ -281,7 +291,7 @@ crossorigin="anonymous"></script>
 <div id="bookmark_feed_list" style="width: 100%; min-width: 1000px; display: none; align-items: center;justify-content: center">
     <div style="display: flex; flex-direction: row; flex-wrap: wrap; width: 1000px; justify-content: center">
         {% for volunteer in bookmark_volunteer_list %}
-        <a href="volunteer_detail/{{volunteer.id}}">
+        <a href="javascript:void(window.open('volunteer_detail/{{volunteer.id}}','_blank','width=500,height=700'))">
             <div style="width: 300px;height: 300px; margin: 10px 5px 0px 5px;">
                 <div><img style="width: 300px;height: 300px; object-fit: cover"
                         src="{% get_media_prefix %}{{ volunteer.volunteer_image }}">
@@ -304,7 +314,7 @@ crossorigin="anonymous"></script>
                 close
             </div>
         </div>
-        <div class="img_upload_space" style="position: absolute; top: 40px; line-height: 480px; text-align: center; border-top: solid 1px gray;width: 100%; height: 400px;">
+        <div class="img_upload_space" style="position: absolute; top: 40px; line-height: 480px; text-align: center; border-top: solid 1px gray;width: 97%; height: 400px;">
             새 이미지 업로드
         </div>
     </div>
@@ -322,11 +332,11 @@ crossorigin="anonymous"></script>
             </div>
         </div>
 
-        <div style="position: absolute; top: 40px; border-top: solid 1px gray;display: flex; flex-direction: row;margin-top: 10px; width:100%; height:90%;">
+        <div style="position: absolute; top: 40px; border-top: solid 1px gray;display: flex; flex-direction: row;margin-top: 10px; width:97%; height:90%;">
             <div class="img_upload_space" style="width: 50%; height: 100%;">  
             </div>
             <div style="border-left: solid 1px gray; width: 49%; height: 95%;">
-                    <textarea id="input_feed_content" class="form-control" style="width: 100%; height: 100%;"
+                    <textarea id="input_feed_content" class="form-control" style="width: 100%; height:95%;"
                               id="exampleFormControlTextarea1" rows="5" placeholder="내용 작성"></textarea>
                 <button id="feed_create_button" type="button" class="btn btn-primary" style="width: 100%; background-color:gray; border-color:gray;">
                     공유하기
@@ -338,6 +348,12 @@ crossorigin="anonymous"></script>
     </div>
 </div>
 </body>
+<div id='wrapper'>
+    <div style="font-size:10px; text-align:center;color:black;opacity: 0.7; margin-top:200px">
+      Copyright 2022 숙명여대 해커톤 김나영,김민경,박수아,백주영 
+    </div>
+  </div>
+  <footer></footer>
 </html>
 
 
