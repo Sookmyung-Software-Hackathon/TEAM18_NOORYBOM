@@ -681,11 +681,11 @@ crossorigin="anonymous"></script>
             method: "POST",
             success: function (data) {
                 console.log("성공");
+                location.replace("/main/profile");
             },
             error: function (request, status, error) {
                 console.log("에러");
-            };
-            location.replace("/main/profile");
+            },
         });
     })
 </script>
