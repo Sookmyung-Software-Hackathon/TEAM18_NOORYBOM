@@ -64,6 +64,17 @@ crossorigin="anonymous"></script>
         font-family: 'Pretendard-Regular';
       }
 
+    #wrapper{
+        height: auto;
+        min-height: 100%;
+        padding-bottom: 10px;
+      }
+    footer{
+        height: 10px;
+        position : relative;
+        transform : translateY(-100%);
+      }
+
 </style>
 
 <body>
@@ -122,9 +133,10 @@ crossorigin="anonymous"></script>
                 <!-- 여기서부터 피드박스 -->
                 <div id = "volunteer_review_content" style="width:1200px; display:flex; flex-wrap:wrap;">
                     {% for feed in feeds %}
-                        <div id = "select_review" feed_id="{{feed.id}}" style="width: 250px;  margin: 20px; border:0; box-shadow: 0px 2px 2px 0px gray; border-radius: 5%;"> 
+                    <div style="position:relative;">
+                        <div id = "select_review" feed_id="{{feed.id}}" style="width: 250px; height:350px; margin: 20px; border:0; box-shadow: 0px 2px 2px 0px gray; border-radius: 5%;"> 
                             <div class="feed_box" style="border:none">
-                                <div style="display: flex; flex-wrap: wrap; flex-direction: row; align-items: center; margin: 20px; position: relative;">
+                                <div style="display: flex; flex-wrap: wrap; flex-direction: row; align-items: center; margin: 20px;">
                                     <div class="box" style="width: 25px; height: 25px ">
                                         <img class="profile" src="{% get_media_prefix %}{{ feed.profile_image }}">
                                     </div>
@@ -137,14 +149,14 @@ crossorigin="anonymous"></script>
                                         </a>
                                         <img src="https://img.icons8.com/windows/344/trash.png" id = "deletebox_feed" feed_id="{{ feed.id }}" class="deletebox_feed" style="position: absolute; right: 0px; cursor:pointer; width : 25px; height : 25px">
                                     {%endif%}
-                            </div>
+                                </div>
                             <div>
                                 <a href="javascript:void(window.open('feed_detail/{{feed.id}}','_blank','width=500,height=700'))">
-                                <img style="width: 100%" src="{% get_media_prefix %}{{ feed.image }}">
+                                <img style="width: 100%; max-height:200px;" src="{% get_media_prefix %}{{ feed.image }}">
                                 </a>
                             </div>
-                            <div style="margin: 10px 20px;display: flex; flex-direction: row; justify-content: space-between">
-                            <div>
+                            <div style="margin: 10px 20px; display: flex; flex-direction: row; justify-content: space-between">
+                            <div style="margin:10px; position:absolute; bottom:40px;">
                                 <span id="favorite_{{ feed.id }}" feed_id="{{ feed.id }}"
                                     class="favorite material-icons-outlined"
                                     style="color: red;cursor: pointer;">
@@ -155,16 +167,18 @@ crossorigin="anonymous"></script>
                                     {% endif %}
                                 </span>
                             </div>
+                            <div style="margin: 10px;text-align: left;font-size: 16px; position:absolute; bottom:20px;">
+                                <b>{{ feed.nickname }}</b> 
+                                {%if feed.content|length|get_digit:"-1" > 35  %}
+                                    {{ feed.content | slice:"22"}}...
+                                {%else%}
+                                    {{ feed.content}}
+                                {%endif%}
+                            </div>
                         </div>
+                    </div>
                 </div>
-                <div style="margin: 10px;text-align: left;font-size: 16px">
-                    <b>{{ feed.nickname }}</b> 
-                    {%if feed.content|length|get_digit:"-1" > 35  %}
-                        {{ feed.content | slice:"22"}}...
-                    {%else%}
-                        {{ feed.content}}
-                    {%endif%}
-                </div>
+                
                         {% comment %} <!-- 댓글 부분 -->
                         <div id="reply_list_{{ feed.id }}">
                             {% for reply in feed.reply_list %}
@@ -194,7 +208,7 @@ crossorigin="anonymous"></script>
         {%if volunteer.grant == 1 %}
         {%else%}
         
-            <div class="feed_box" style="width: 250px; height : 380px; margin: 20px; border:0; border-radius: 5%; box-shadow: 0px 2px 2px 0px gray;">
+            <div class="feed_box" style="position:relative; width: 250px; height : 400px; margin: 20px; border:0; border-radius: 5%; box-shadow: 0px 2px 2px 0px gray;">
                 <div style="display:flex; flex-wrap: wrap; align-items: center; margin: 20px; position: relative;">
                     {%if volunteer.admin == mainuser%}
                     <img src="https://img.icons8.com/windows/344/trash.png" id = "deletebox_volunteer" volunteer_id="{{ volunteer.id }}" class="deletebox_volunteer" style = "width: 25px; height: 25px; position: absolute; right: 0px;cursor:pointer;">
@@ -212,9 +226,9 @@ crossorigin="anonymous"></script>
                 </div>
                 <div style="width: 100%; height:50%; display:flex; align-items:center">
                     <a href="javascript:void(window.open('volunteer_detail/{{volunteer.id}}','_blank','width=500,height=700'))">
-                    <img style="width: 100%;" src="{% get_media_prefix %}{{ volunteer.image }}"></a>
+                    <img style="position:absolute; top:50px; width: 100%; max-height:300px;" src="{% get_media_prefix %}{{ volunteer.image }}"></a>
                 </div>
-                <div style="margin: 0 20px;display: flex; flex-direction: row; justify-content: space-between">
+                <div style="margin: 0 20px;display: flex; flex-direction: row; justify-content: space-between; position:absolute; bottom:60px;">
                     <div>
                         <span id="bookmark_{{ volunteer.id }}" volunteer_id="{{ volunteer.id }}" class="bookmark material-icons-outlined" style="cursor: pointer">
                             {% if volunteer.is_marked %}
@@ -227,10 +241,10 @@ crossorigin="anonymous"></script>
                     
                 </div>
                 <div>
-                <div style="margin: 0 20px;text-align: left;font-size: 14px"> 
+                <div style="margin: 0 20px;text-align: left;font-size: 14px; position:absolute; bottom:23px;"> 
                     지역 : {{ volunteer.region }} 
                 </div>
-                <div style="margin: 0 20px;text-align: left;font-size: 14px"> 
+                <div style="margin: 0 20px;text-align: left;font-size: 14px; position:absolute; bottom:7px"> 
                     {{ volunteer.participant }} 명 남음
                 </div>
             </div>
@@ -242,49 +256,55 @@ crossorigin="anonymous"></script>
 </div>
 
     <!-- 첫번째 모달 -->
-    <div id="first_modal" class="modal_overlay" style="position:fixed;">
-        <div class="modal_window">
-            <div style="display: flex; flex-direction: row; justify-content: space-between">
-                <div style="position:absolute; left: 44%;">
-                    봉사 후기 추가
-                </div>
-                <div style="width:20px; height:20px; position:absolute; right: 5%" class="modal_close material-icons-outlined">
-                    close
-                </div>
+<div id="first_modal" class="modal_overlay" style="position:fixed;">
+    <div class="modal_window">
+        <div style="display: flex; flex-direction: row; justify-content: space-between">
+            <div style="position:absolute; left: 44%;">
+                봉사 후기 추가
             </div>
-            <div class="img_upload_space" style="position: absolute; top: 40px; line-height: 480px; text-align: center; border-top: solid 1px gray;width: 100%; height: 400px;">
-                새 이미지 업로드
+            <div style="width:20px; height:20px; position:absolute; right: 5%" class="modal_close material-icons-outlined">
+                close
             </div>
         </div>
-    </div>
-    
-    <!-- 두번째 모달 -->
-    <div id="second_modal" class="modal_overlay" style="position:fixed;">
-        <div class="modal_window">
-            <div style="display: flex; flex-direction: row; justify-content: space-between">
-                <div style="position:absolute; left: 44%;">
-                    봉사 후기 추가
-                </div>
-                <div style="width:20px; height:20px; position:absolute; right: 5%" class="modal_close material-icons-outlined">
-                    close
-                </div>
-            </div>
-    
-            <div style="position: absolute; top: 40px; border-top: solid 1px gray;display: flex; flex-direction: row;margin-top: 10px; width:100%; height:90%;">
-                <div class="img_upload_space" style="width: 50%; height: 100%;">  
-                </div>
-                <div style="border-left: solid 1px gray; width: 49%; height: 95%;">
-                        <textarea id="input_feed_content" class="form-control" style="width: 100%; height: 100%;"
-                                  id="exampleFormControlTextarea1" rows="5" placeholder="내용 작성"></textarea>
-                    <button id="feed_create_button" type="button" class="btn btn-primary" style="width: 100%; background-color:gray; border-color:gray;">
-                        공유하기
-                    </button>
-                </div>
-    
-            </div>
-    
+        <div class="img_upload_space" style="position: absolute; top: 40px; line-height: 480px; text-align: center; border-top: solid 1px gray;width: 97%; height: 400px;">
+            새 이미지 업로드
         </div>
     </div>
+</div>
+
+<!-- 두번째 모달 -->
+<div id="second_modal" class="modal_overlay" style="position:fixed;">
+    <div class="modal_window">
+        <div style="display: flex; flex-direction: row; justify-content: space-between">
+            <div style="position:absolute; left: 44%;">
+                봉사 후기 추가
+            </div>
+            <div style="width:20px; height:20px; position:absolute; right: 5%" class="modal_close material-icons-outlined">
+                close
+            </div>
+        </div>
+
+        <div style="position: absolute; top: 40px; border-top: solid 1px gray;display: flex; flex-direction: row;margin-top: 10px; width:97%; height:90%;">
+            <div class="img_upload_space" style="width: 50%; height: 100%;">  
+            </div>
+            <div style="border-left: solid 1px gray; width: 49%; height: 95%;">
+                    <textarea id="input_feed_content" class="form-control" style="width: 100%; height:95%;"
+                              id="exampleFormControlTextarea1" rows="5" placeholder="내용 작성"></textarea>
+                <button id="feed_create_button" type="button" class="btn btn-primary" style="width: 100%; background-color:gray; border-color:gray;">
+                    공유하기
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+    <div id='wrapper'>
+        <div style="font-size:10px; text-align:center;color:black;opacity: 0.7; margin-top:200px">
+          Copyright 2022 숙명여대 해커톤 김나영,김민경,박수아,백주영 
+        </div>
+      </div>
+      <footer></footer>
 
 
 <!-- Optional JavaScript; choose one of the two! -->
@@ -640,4 +660,3 @@ crossorigin="anonymous"></script>
 
 
 </html>
-
