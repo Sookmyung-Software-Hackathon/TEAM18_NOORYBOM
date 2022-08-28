@@ -461,7 +461,7 @@ class Follow(APIView):
         mainuser.save()
         print(mainuser.followers.all())
 
-        return render(request, "content/test.html", context=dict(mainuser=mainuser))
+        return Response(status=200)
 
 
 
