@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import DeleteVolunteer, SearchResult, UploadFeed, Profile,\
     Community, UploadReply, ToggleLike, ToggleBookmark, DeleteFeed, createVolunteerITem, \
-        Main, Search, Follow, Participate, NotParticipate, feed_detail, volunteer_detail, get_update_feed, PutFeed
+        Main, Search, Follow, Participate, NotParticipate, feed_detail, volunteer_detail, get_update_feed, PutFeed, profiledetail
 from . import views
 
 
@@ -25,6 +25,7 @@ urlpatterns = [
     path('like_feed', ToggleLike.as_view()),
     path('feed_detail/<int:feed_id>', feed_detail),
     path('volunteer_detail/<int:feed_id>', volunteer_detail),
+    path('profile_detail/<int:user_id>', profiledetail),
 
     path('follow', Follow.as_view(), name="folow"),
 

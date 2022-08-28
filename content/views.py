@@ -43,7 +43,7 @@ class Community(APIView):
             like_count=Like.objects.filter(feed_id=feed.id, is_like=True).count()
             is_liked=Like.objects.filter(feed_id=feed.id, email=email, is_like=True).exists()
             feed_list.append(dict(id=feed.id,
-                                email = feed.email,
+                                user_id=user.id,
                                 image=feed.image,
                                 content=feed.content,
                                 like_count=like_count,
@@ -453,13 +453,13 @@ class Follow(APIView):
         follow_email = request.data.get('follow_email', None)
         follow_user = User.objects.filter(email=follow_email).first()
         print(follow_user.id)
+        print(mainuser.followers.all())
 
         if follow_user in mainuser.followers.all():
             mainuser.followers.remove(follow_user)
         else:
             mainuser.followers.add(follow_user)
         mainuser.save()
-        print(mainuser.followers.all())
 
         return Response(status=200)
 
@@ -511,3 +511,50 @@ class PutFeed(APIView):
         feed.save()
 
         return Response(status=200)
+
+
+def profiledetail(request, user_id):
+    detail_user = get_object_or_404(User, pk = user_id)
+    participate_list=[]
+
+    email = request.session.get('email', None)
+
+    realmainuser = User.objects.filter(email=email).first()
+
+    if detail_user.role =='Admin':
+            created_list = VolunteerItem.objects.filter(admin=detail_user).all()
+            for item in created_list: # 봉사 기관자가 생성한 voluteeritem에 대해서
+                participated_created_list = ParticipateItems.objects.filter(volunteerItem_id = item.id).all() # 신청된 것들 선발
+                if participated_created_list: #만약 신청 받은 것이 있다면
+                    for participated_item in participated_created_list:
+                        user = User.objects.filter(id = participated_item.user_id).first()
+                        isgranted = participated_item.grant
+                        participate_list.append([item, user, isgranted])
+    else:
+        participated_list =[]
+        participated_list.append(ParticipateItems.objects.filter(user_id = detail_user.id).all()) # 현재 유저가 신청한 volunteeritem들
+        for i in participated_list:
+            print(i)
+            for participated_item in i:
+                print(participated_item)
+                if(participated_item):
+                    participate_item = VolunteerItem.objects.filter(id = participated_item.volunteerItem_id) # 직접 volunteeritem 객체 배열에 넣어주기
+                    if participate_item:
+                        grant = ParticipateItems.objects.filter(volunteerItem_id = participate_item.first().id).first().grant # 해당 봉사의 승인 여부
+                        participate_list.append([participate_item, grant])
+
+    feed_list = Feed.objects.filter(email=detail_user.email)
+    like_list = list(Like.objects.filter(email=detail_user.email, is_like=True).values_list('feed_id', flat=True))
+    like_feed_list = Feed.objects.filter(id__in=like_list)
+    bookmark_list = list(Bookmark.objects.filter(email=detail_user.email, is_marked=True).values_list('feed_id', flat=True))
+    bookmark_volunteer_list = VolunteerItem.objects.filter(id__in=bookmark_list)
+
+    user_list = User.objects.order_by('id')
+    return render(request, 'content/profile_detail.html', context=dict(feed_list=feed_list,
+                                                                like_feed_list=like_feed_list,
+                                                                bookmark_volunteer_list=bookmark_volunteer_list,
+                                                                mainuser = detail_user,
+                                                                realmainuser = realmainuser,
+                                                                participate_list=participate_list,
+                                                                user_list =user_list
+                                                            ))
