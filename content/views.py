@@ -444,7 +444,7 @@ class Follow(APIView):
         mainuser = User.objects.filter(email=email).first()
         user_list = User.objects.order_by('id')
         
-        return render(request, "content/test.html",context=dict(user_list=user_list, mainuser=mainuser))
+        return render(request, "content/profile.html",context=dict(user_list=user_list, mainuser=mainuser))
 
     def post(self, request):
         email = request.session.get('email', None)
